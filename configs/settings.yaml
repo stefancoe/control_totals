@@ -79,13 +79,13 @@ census_variables:
 #----------------------------
 # issues with pulling all columns from ElmerGeo, so columns need to be specified
 ElmerGeo: # database
- - name: control_areas # name the table will be saved as in h5
-   sql_table: CONTROL18_DASHBOARD # table in elmer
-   columns: # columns to pull from elmer
-    - control_id
-    - control_na
-    - county_id
-   id_col: control_id # id column must be an integer
+#  - name: control_areas # name the table will be saved as in h5
+#    sql_table: CONTROL18_DASHBOARD # table in elmer
+#    columns: # columns to pull from elmer
+#     - control_id
+#     - control_na
+#     - county_id
+#    id_col: control_id # id column must be an integer
 
  - name: blocks
    sql_table: BLOCK2020
@@ -110,6 +110,10 @@ Elmer: # database
 data_tables:
  - name: control_target_lookup
    file: control_target_lookup.csv
+
+ - name: regional_geography_lookup
+   file: rgid_lookup.csv
+   id_col: rgid_22
 
  - name: ref_projection
    file: REF_projection.csv
@@ -151,16 +155,27 @@ targets_tables:
    total_pop_chg_start: 2020
    emp_chg_start: 2019
 
+
+#----------------------------
+# shapefiles to be read in from data/shapefiles folder
+#----------------------------
+shapefiles:
+ - name: regional_geography
+   file: reggeog_22_allnames_edit.shp
+   id_col: RGid_22
+
+
 #----------------------------
 # Pypyr steps
 #----------------------------
 steps:
 #  - steps.get_elmer_data # pulls data from elmer database and saves to hdf5
 #  - steps.get_census_data # pulls decennial census data from api and saves to hdf5
- - steps.load_data # loads data from csv files into hdf5
-#  - steps.block_control_xwalk # creates block to control area crosswalk
-#  - steps.prepare_block_data # aggregates block data (ofm and decennial) to control area level
- - steps.adjust_targets_to_base_year # adjusts targets to base year using ofm and employment data
+#  - steps.load_shapefiles # loads shapefiles in data/shapefiles into hdf5
+#  - steps.load_data # loads data from csv files into hdf5
+ - steps.block_regional_geography_xwalk # creates block to regional geography crosswalk
+#  - steps.prepare_block_data # aggregates block data (ofm and decennial) to regional geography level
+#  - steps.adjust_targets_to_base_year # adjusts targets to base year using ofm and employment data
 #  - steps.units_chg_targets # calculates controls for targets that use housing unit change (only king county for now)
 #  - steps.total_pop_chg_targets # calculates controls for targets that use total population change
 #  - steps.extrapolate_to_controls_year # extrapolates out to the control totals end year from the targets end year

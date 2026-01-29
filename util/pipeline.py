@@ -43,6 +43,10 @@ class Pipeline:
     def get_output_table_list(self):
         # Returns a list of output table names from settings.yaml
         return self.settings.get('output_table_list', [])
+    
+    def get_shapefile_list(self):
+        # returns of list of shapefile names from settings.yaml
+        return self.settings.get('shapefiles',[])
 
     def get_table(self, table_name):
         with pd.HDFStore(f"{self.get_data_dir()}/pipeline.h5", mode='r') as h5store:
@@ -71,10 +75,14 @@ class Pipeline:
         return df
     
     def get_id_col(self, table_name):
-        for table in self.get_elmer_geo_list() + self.get_elmer_list():
-            if table['name'] == table_name and 'id_col' in table:
-                return table['id_col']
-        return None
+        table_list = self.get_elmer_geo_list() + self.get_elmer_list() + self.get_output_table_list() + self.get_shapefile_list()
+        for table in table_list:
+            if table.get('name') == table_name:
+                if 'id_col' in table:
+                    return table['id_col']
+                else:
+                    raise KeyError(f"'id_col' not found for table '{table_name}'.")
+        raise ValueError(f"Table '{table_name}' not found in settings.")
     
     def convert_id_to_int64(self, table, df):
         if 'id_col' in table:

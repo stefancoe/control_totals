@@ -1,0 +1,215 @@
+rgid_22,target_id,target_name,control_id,control_name
+1,27,Algona,27,Algona
+2,128,Arlington,128,Arlington
+3,155,Arlington UGA,155,Arlington UGA
+4,3,Auburn,3,Auburn
+5,3,Auburn,3,Auburn
+6,46,Auburn PAA,46,Auburn PAA
+7,69,Bainbridge Island,69,Bainbridge Island
+8,62,King no growth UGA,201,King no growth UGA Bear Creek UPD
+9,28,Beaux Arts,28,Beaux Arts
+10,1,Bellevue,1,Bellevue
+11,48,Bellevue PAA,48,Bellevue PAA
+12,29,Black Diamond,29,Black Diamond
+13,49,Black Diamond PAA,49,Black Diamond PAA
+14,87,Bonney Lake,87,Bonney Lake
+15,107,Pierce UGA,107,Pierce UGA
+16,4,Bothell,4,Bothell
+17,129,Bothell MUGA,129,Bothell MUGA
+18,65,Bremerton,65,Bremerton
+19,67,Bremerton UGA,67,Bremerton UGA
+20,143,Brier,143,Brier
+21,156,Brier MUGA,156,Brier MUGA
+22,88,Buckley,88,Buckley
+23,5,Burien,5,Burien
+24,89,Carbonado,89,Carbonado
+25,107,Pierce UGA,107,Pierce UGA
+26,30,Carnation,30,Carnation
+27,30,Carnation,202,Carnation UGA
+28,75,Central Kitsap UGA,75,Central Kitsap UGA
+29,31,Clyde Hill,31,Clyde Hill
+30,32,Covington,32,Covington
+31,32,Covington,203,Covington PAA
+32,144,Darrington,144,Darrington
+33,157,Darrington UGA,157,Darrington UGA
+34,14,Des Moines,14,Des Moines
+36,82,DuPont,82,DuPont
+37,33,Duvall,33,Duvall
+38,33,Duvall,204,Duvall UGA
+39,90,Eatonville,90,Eatonville
+40,107,Pierce UGA,107,Pierce UGA
+41,91,Edgewood,91,Edgewood
+42,91,Edgewood,91,Edgewood
+43,130,Edmonds,130,Edmonds
+44,131,Edmonds MUGA,131,Edmonds MUGA
+45,34,Enumclaw,34,Enumclaw
+46,34,Enumclaw,205,Enumclaw UGA
+47,125,Everett,125,Everett
+48,132,Everett MUGA,132,Everett MUGA
+49,6,Federal Way,6,Federal Way
+50,6,Federal Way,6,Federal Way
+51,15,Federal Way PAA,15,Federal Way PAA
+53,83,Fife,83,Fife
+54,107,Pierce UGA,107,Pierce UGA
+55,107,Pierce UGA,107,Pierce UGA
+56,84,Fircrest,84,Fircrest
+57,107,Pierce UGA,107,Pierce UGA
+58,92,Gig Harbor,92,Gig Harbor
+59,107,Pierce UGA,107,Pierce UGA
+60,145,Gold Bar,145,Gold Bar
+61,158,Gold Bar UGA,158,Gold Bar UGA
+62,146,Granite Falls,146,Granite Falls
+63,159,Granite Falls UGA,159,Granite Falls UGA
+64,35,Hunts Point,35,Hunts Point
+65,147,Index,147,Index
+66,7,Issaquah,7,Issaquah
+67,51,Issaquah PAA,51,Issaquah PAA
+69,16,Kenmore,16,Kenmore
+70,8,Kent,8,Kent
+71,52,Kent PAA,52,Kent PAA
+73,64,King Rural,64,King Rural
+74,64,King Rural,64,King Rural
+75,64,King Rural,64,King Rural
+76,64,King Rural,301,King Rural Ag & Resource
+77,64,King Rural,301,King Rural Ag & Resource
+78,64,King Rural,301,King Rural Ag & Resource
+79,64,King Rural,301,King Rural Ag & Resource
+81,53,King UGA,53,King UGA
+82,53,King UGA,53,King UGA
+83,70,Kingston UGA,70,Kingston UGA
+84,9,Kirkland,9,Kirkland
+86,76,Kitsap Rural,76,Kitsap Rural
+87,76,Kitsap Rural,76,Kitsap Rural
+88,76,Kitsap Rural,76,Kitsap Rural
+89,76,Kitsap Rural,302,Kitsap Rural Ag & Resource
+90,76,Kitsap Rural,302,Kitsap Rural Ag & Resource
+91,17,Lake Forest Park,17,Lake Forest Park
+92,148,Lake Stevens,148,Lake Stevens
+94,161,Lake Stevens UGA,161,Lake Stevens UGA
+95,162,Lake Stickney Gap,162,Lake Stickney Gap
+96,79,Lakewood,79,Lakewood
+97,107,Pierce UGA,107,Pierce UGA
+98,133,Larch Way Overlap,133,Larch Way Overlap
+99,127,Lynnwood,127,Lynnwood
+100,135,Lynnwood MUGA,135,Lynnwood MUGA
+101,163,Maltby UGA,163,Maltby UGA
+102,36,Maple Valley,36,Maple Valley
+103,136,Marysville,136,Marysville
+104,136,Marysville,210,Tulalip Tribe
+105,164,Marysville UGA,164,Marysville UGA
+106,37,Medina,37,Medina
+107,18,Mercer Island,18,Mercer Island
+108,138,Mill Creek,138,Mill Creek
+109,139,Mill Creek MUGA,139,Mill Creek MUGA
+110,38,Milton,38,Milton
+111,38,Milton,38,Milton
+112,62,King no growth UGA,206,King no growth UGA Milton PAA
+114,149,Monroe,149,Monroe
+115,166,Monroe UGA,166,Monroe UGA
+116,140,Mountlake Terrace,140,Mountlake Terrace
+117,167,Mountlake Terrace MUGA,167,Mountlake Terrace MUGA
+118,141,Mukilteo,141,Mukilteo
+119,142,Mukilteo MUGA,142,Mukilteo MUGA
+120,19,Newcastle,19,Newcastle
+121,57,Newcastle PAA,57,Newcastle PAA
+122,39,Normandy Park,39,Normandy Park
+123,40,North Bend,40,North Bend
+124,40,North Bend,207,North Bend UGA
+125,20,North Highline,20,North Highline
+126,94,Orting,94,Orting
+127,41,Pacific,41,Pacific
+128,58,Pacific PAA,58,Pacific PAA
+129,168,Paine Field Area,168,Paine Field Area
+130,85,"Mid-County, Parkland-Spanaway-Midland, South Hill",85,"Mid-County, Parkland-Spanaway-Midland, South Hill"
+131,85,"Mid-County, Parkland-Spanaway-Midland, South Hill",85,"Mid-County, Parkland-Spanaway-Midland, South Hill"
+133,124,Pierce Rural,124,Pierce Rural
+134,124,Pierce Rural,124,Pierce Rural
+135,124,Pierce Rural,124,Pierce Rural
+136,124,Pierce Rural,124,Pierce Rural
+137,124,Pierce Rural,303,Pierce Rural Ag & Resource
+138,124,Pierce Rural,303,Pierce Rural Ag & Resource
+139,124,Pierce Rural,303,Pierce Rural Ag & Resource
+140,124,Pierce Rural,303,Pierce Rural Ag & Resource
+141,124,Pierce Rural,303,Pierce Rural Ag & Resource
+142,124,Pierce Rural,303,Pierce Rural Ag & Resource
+143,107,Pierce UGA,107,Pierce UGA
+144,71,Port Orchard,71,Port Orchard
+145,72,Port Orchard UGA,72,Port Orchard UGA
+146,73,Poulsbo,73,Poulsbo
+147,74,Poulsbo PUTA,74,Poulsbo PUTA
+148,80,Puyallup,80,Puyallup
+149,80,Puyallup,80,Puyallup
+150,107,Pierce UGA,107,Pierce UGA
+151,107,Pierce UGA,107,Pierce UGA
+152,85,"Mid-County, Parkland-Spanaway-Midland, South Hill",85,"Mid-County, Parkland-Spanaway-Midland, South Hill"
+153,10,Redmond,10,Redmond
+154,60,Redmond PAA,60,Redmond PAA
+155,11,Renton,11,Renton
+157,22,Renton PAA - East Renton,22,Renton PAA - East Renton
+158,23,Renton PAA - Fairwood,23,Renton PAA - Fairwood
+159,24,Renton PAA - West Hill,24,Renton PAA - West Hill
+160,96,Roy,96,Roy
+161,107,Pierce UGA,107,Pierce UGA
+162,97,Ruston,97,Ruston
+163,42,Sammamish,42,Sammamish
+164,61,Sammamish PAA,61,Sammamish PAA
+165,12,SeaTac,12,SeaTac
+166,2,Seattle,2,Seattle
+167,20,North Highline,20,North Highline
+168,25,Shoreline,25,Shoreline
+169,169,Silver Firs Gap,169,Silver Firs Gap
+170,68,Silverdale,68,Silverdale
+171,43,Skykomish,43,Skykomish
+172,150,Snohomish,150,Snohomish
+174,176,Snohomish Rural,176,Snohomish Rural
+175,176,Snohomish Rural,176,Snohomish Rural
+176,176,Snohomish Rural,176,Snohomish Rural
+177,176,Snohomish Rural,210,Tulalip Tribe
+178,176,Snohomish Rural,304,Snohomish Rural Ag & Resource
+179,176,Snohomish Rural,210,Tulalip Tribe
+180,176,Snohomish Rural,304,Snohomish Rural Ag & Resource
+181,176,Snohomish Rural,210,Tulalip Tribe
+182,170,Snohomish UGA,170,Snohomish UGA
+183,44,Snoqualmie,44,Snoqualmie
+184,44,Snoqualmie,208,Snoqualmie UGA
+185,44,Snoqualmie,208,Snoqualmie UGA
+186,85,"Mid-County, Parkland-Spanaway-Midland, South Hill",85,"Mid-County, Parkland-Spanaway-Midland, South Hill"
+187,98,South Prairie,98,South Prairie
+188,107,Pierce UGA,107,Pierce UGA
+189,151,Stanwood,151,Stanwood
+190,172,Stanwood UGA,172,Stanwood UGA
+191,99,Steilacoom,99,Steilacoom
+192,152,Sultan,152,Sultan
+193,174,Sultan UGA,174,Sultan UGA
+194,86,Sumner,86,Sumner
+195,107,Pierce UGA,107,Pierce UGA
+196,77,Tacoma,77,Tacoma
+197,77,Tacoma,77,Tacoma
+198,85,"Mid-County, Parkland-Spanaway-Midland, South Hill",85,"Mid-County, Parkland-Spanaway-Midland, South Hill"
+199,85,"Mid-County, Parkland-Spanaway-Midland, South Hill",85,"Mid-County, Parkland-Spanaway-Midland, South Hill"
+200,107,Pierce UGA,107,Pierce UGA
+201,13,Tukwila,13,Tukwila
+202,62,King no growth UGA,209,King no growth UGA Tukwila PAA
+203,81,University Place,81,University Place
+204,100,Wilkeson,100,Wilkeson
+205,26,Woodinville,26,Woodinville
+206,153,Woodway,153,Woodway
+207,175,Woodway MUGA,175,Woodway MUGA
+208,45,Yarrow Point,45,Yarrow Point
+209,125,Everett,404,Naval Station Everett
+210,76,Kitsap Rural,402,NBK - Bangor
+211,65,Bremerton,401,NBK - Bremerton
+213,107,Pierce UGA,403,JBLM
+222,107,Pierce UGA,403,JBLM
+224,107,Pierce UGA,403,JBLM
+227,124,Pierce Rural,403,JBLM
+350,93,Milton,93,Milton
+351,93,Milton,93,Milton
+352,78,Auburn,78,Auburn
+353,107,Pierce UGA,107,Pierce UGA
+354,126,Bothell,126,Bothell
+355,107,Pierce UGA,107,Pierce UGA
+356,95,Pacific,95,Pacific
+357,107,Pierce UGA,107,Pierce UGA
+358,22,Renton PAA - East Renton,22,Renton PAA - East Renton
+359,124,Pierce Rural,124,Pierce Rural

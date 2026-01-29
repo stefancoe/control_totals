@@ -3,6 +3,7 @@ from util import Pipeline
 
 
 def get_emp_no_mil_res_con_col(pipeline, year):
+    # get column name for employment excluding military, resource and construction
     p = pipeline
     for table in p.settings['data_tables']:
         if table['name'] == f'employment_{year}_by_control_area':
@@ -25,6 +26,7 @@ def combine_targets(pipeline, target_type):
 
 def sum_estimates_to_target_area(pipeline, year, target_type, table):
     # target_type: 'total_pop' or 'units' or 'emp'
+    # table: 'ofm_estimates' or 'employment'
 
     p = pipeline
     
@@ -70,6 +72,7 @@ def get_estimates_all_years(pipeline, start_years, target_type, table):
 
 def adjust_targets(pipeline, target_type, table):
     # target_type: 'pop' or 'units' or 'emp'
+    # table: 'ofm_estimates' or 'employment'
 
     p = pipeline
     base_year = p.settings['base_year']
@@ -99,7 +102,6 @@ def adjust_targets(pipeline, target_type, table):
     chg_col = f'{target_type}_chg'
     df[chg_adj_col] = (df[chg_col] - df[est_chg_col]).clip(lower=0)
 
-    df.to_csv(f'data/debug_adjusted_{target_type}_change_targets.csv',index=False)
     # save adjusted targets table
     table_name = f'adjusted_{target_type}_change_targets'
     out_df = df[['target_id','start',chg_col,chg_adj_col]]

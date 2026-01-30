@@ -55,11 +55,17 @@ king_hhpop_2044: 2828620 # target household population for king county in 2044
                          # replace with calculated value in the future
 
 #----------------------------
-# Employment target types
+# Employment settings
 #----------------------------
 emp_target_types:
   includes res con: [53035, 53053] # Kitsap and Pierce targets include resource and construction employment
   excludes res con: [53033, 53061] # King, Snohomish targets do not include resource and construction employment
+
+res_con_emp_growth_pct: 0.028 # percentage of employment growth from resource and construction
+                              # ussed to adjust King and Snohomish employment growth targets since they 
+                              # exclude resource and construction employment. Originally based on REF
+                              # projections, will need to be updated, possibly with REMI
+
 #----------------------------
 # Census settings
 #----------------------------
@@ -183,9 +189,10 @@ steps:
 #  - steps.load_data # loads data from csv files into hdf5
 #  - steps.block_regional_geography_xwalk # creates block to regional geography crosswalk
 #  - steps.prepare_block_data # aggregates block data (ofm and decennial) to regional geography level
-#  - steps.adjust_targets_to_base_year # adjusts targets to base year using ofm and employment data
+ - steps.adjust_targets_to_base_year # adjusts targets to base year using ofm and employment data
 #  - steps.units_chg_targets # calculates targets that use housing unit change (only king county for now)
 #  - steps.total_pop_chg_targets # calculates targets that use total population change
  - steps.emp_chg_targets_res_con # calculates targets for counties that include resource and construction employment
+ - steps.emp_chg_targets_no_res_con # calculates targets for counties that exclude resource and construction employment
 #  - steps.emp_chg_targets_no_res_con # calculates targets for counties that exclude resource and construction employment
 #  - steps.extrapolate_to_controls_year # extrapolates out to the control totals end year from the targets end year

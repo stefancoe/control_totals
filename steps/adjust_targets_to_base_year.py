@@ -104,12 +104,16 @@ def adjust_targets(pipeline, target_type, table):
         est_chg_col = f'est_{target_type}_chg'
         df.at[index, est_chg_col] = row[base_col] - row[start_col]
 
-    # fill NA, round and clip to 0 (no negative change)
-    df[est_chg_col] = df[est_chg_col].fillna(0).round(0).clip(lower=0).astype(int)
-    # adjust target change by subtracting est change, minimum of 0
     chg_adj_col = f'{target_type}_chg_adj'
     chg_col = f'{target_type}_chg'
-    df[chg_adj_col] = (df[chg_col] - df[est_chg_col]).clip(lower=0)
+    if target_type == 'emp':
+        df[est_chg_col] = df[est_chg_col].fillna(0).round(0).astype(int)
+        df[chg_adj_col] = (df[chg_col] - df[est_chg_col])
+    else:
+        # fill NA, round and clip to 0 (no negative change)
+        df[est_chg_col] = df[est_chg_col].fillna(0).round(0).clip(lower=0).astype(int)
+        # adjust target change by subtracting est change, minimum of 0
+        df[chg_adj_col] = (df[chg_col] - df[est_chg_col]).clip(lower=0)
 
     # save adjusted targets table
     table_name = f'adjusted_{target_type}_change_targets'

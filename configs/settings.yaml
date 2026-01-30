@@ -118,12 +118,14 @@ data_tables:
  - name: ref_projection
    file: REF_projection.csv
 
- - name: employment_2019_by_control_area
+ - name: employment_2019_by_regional_geography
    file: Employment 2019.csv
+   id_col: RGid_22
    no_mil_res_con_col: TotEmpNoMil-ResCon # column name for employment excluding military, resource and construction
 
- - name: employment_2020_by_control_area
+ - name: employment_2020_by_regional_geography
    file: Employment 2020.csv
+   id_col: RGid_22
    no_mil_res_con_col: TotEmpNoMil-ResCon # column name for employment excluding military, resource and construction
 
 targets_tables:
@@ -172,8 +174,8 @@ steps:
 #  - steps.get_elmer_data # pulls data from elmer database and saves to hdf5
 #  - steps.get_census_data # pulls decennial census data from api and saves to hdf5
 #  - steps.load_shapefiles # loads shapefiles in data/shapefiles into hdf5
-#  - steps.load_data # loads data from csv files into hdf5
- - steps.block_regional_geography_xwalk # creates block to regional geography crosswalk
+ - steps.load_data # loads data from csv files into hdf5
+#  - steps.block_regional_geography_xwalk # creates block to regional geography crosswalk
 #  - steps.prepare_block_data # aggregates block data (ofm and decennial) to regional geography level
 #  - steps.adjust_targets_to_base_year # adjusts targets to base year using ofm and employment data
 #  - steps.units_chg_targets # calculates controls for targets that use housing unit change (only king county for now)

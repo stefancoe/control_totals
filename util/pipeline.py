@@ -40,6 +40,10 @@ class Pipeline:
         # Returns a list of table names from settings.yaml
         return self.settings.get('Elmer', [])
     
+    def get_data_table_list(self):
+        # Returns a list of data table names from settings.yaml
+        return self.settings.get('data_tables', [])
+    
     def get_output_table_list(self):
         # Returns a list of output table names from settings.yaml
         return self.settings.get('output_table_list', [])
@@ -75,7 +79,7 @@ class Pipeline:
         return df
     
     def get_id_col(self, table_name):
-        table_list = self.get_elmer_geo_list() + self.get_elmer_list() + self.get_output_table_list() + self.get_shapefile_list()
+        table_list = self.get_elmer_geo_list() + self.get_elmer_list() + self.get_data_table_list() + self.get_shapefile_list()
         for table in table_list:
             if table.get('name') == table_name:
                 if 'id_col' in table:

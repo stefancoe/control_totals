@@ -5,9 +5,13 @@ from util import Pipeline
 def get_emp_no_mil_res_con_col(pipeline, year):
     # get column name for employment excluding military, resource and construction
     p = pipeline
+    table_name = f'employment_{year}_by_regional_geography'
     for table in p.settings['data_tables']:
-        if table['name'] == f'employment_{year}_by_control_area':
+        if table['name'] == table_name:
+            if 'no_mil_res_con_col' not in table or not table['no_mil_res_con_col']:
+                raise ValueError(f"'no_mil_res_con_col' not specified in settings for table '{table_name}'")
             return table['no_mil_res_con_col']
+    raise ValueError(f"Table '{table_name}' not found in settings")
 
 
 def combine_targets(pipeline, target_type):
@@ -34,19 +38,24 @@ def sum_estimates_to_target_area(pipeline, year, target_type, table):
         # get column name for employment excluding military, resource and construction
         emp_col = get_emp_no_mil_res_con_col(p, year)
         col_name = emp_col
+        # get rgid column from employment table
+        rgid = p.get_id_col(f'{table}_{year}_by_regional_geography')
     else:
         col_name = f'ofm_{target_type}'
+        # get rgid column from the regional geography shapefile since that was used to aggregate ofm and decennial
+        rgid = p.get_id_col('regional_geography')
 
-    # get control to target lookup
-    control_target_lookup = p.get_table('control_target_lookup')
+    # get regional geog to target lookup
+    regional_geog_lookup = p.get_table('regional_geography_lookup')
+    rg_lookup_id =p.get_id_col('regional_geography_lookup')
     
-    # sum estimates by control area
+    # sum estimates by regional geographies
     df = (
-        p.get_table(f'{table}_{year}_by_control_area')
+        p.get_table(f'{table}_{year}_by_regional_geography')
         # add year suffix to ofm column
         .rename(columns={f'{col_name}':f'{target_type}_{year}'})
         # join to target ids
-        .merge(control_target_lookup[['control_id', 'target_id']], on='control_id', how='left')
+        .merge(regional_geog_lookup[[rg_lookup_id, 'target_id']], left_on=rgid, right_on=rg_lookup_id, how='left')
         # groupby sum to target id
         .groupby('target_id').sum().reset_index()
         # return only target id and needed ofm column

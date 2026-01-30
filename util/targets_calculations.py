@@ -47,3 +47,26 @@ def calc_gq(pipeline, df, dec, horizon_year):
     gq_horizon_col = f'gq_{horizon_year}'
     df[gq_horizon_col] = (df['dec_gq_pct'] * reg_gq_horizon).round(0).astype(int)
     return df
+
+
+def load_base_year_emp(pipeline,emp_target_type):
+    # emp_target_type: either 'includes res con' or 'excludes res con'
+    p = pipeline
+    base_year = p.settings['base_year']
+    counties = p.settings['emp_target_types'][emp_target_type]
+
+    emp = p.get_table(f'employment_{base_year}_by_regional_geography')
+    rgid = p.get_id_col(f'employment_{base_year}_by_regional_geography')
+
+    rg_lookup_id = p.get_id_col('regional_geography_lookup')
+    regional_geog_lookup = p.get_table('regional_geography_lookup')[[rg_lookup_id,'target_id','county_id']]
+
+    emp = (
+        emp.merge(regional_geog_lookup, left_on=rgid, right_on=rg_lookup_id, how='left')
+        .query(f'county_id in {counties}')
+        .groupby(['target_id','county_id']).sum()
+        .drop(columns=[rgid, rg_lookup_id])
+        .add_suffix(f'_{base_year}')
+        .reset_index()
+    )
+    return emp

@@ -1,0 +1,157 @@
+target_id,target_name,control_id,control_name,county_id,exclude_from_target
+1,Bellevue,1,Bellevue,53033,0
+2,Seattle,2,Seattle,53033,0
+3,Auburn,3,Auburn,53033,0
+4,Bothell,4,Bothell,53033,0
+5,Burien,5,Burien,53033,0
+6,Federal Way,6,Federal Way,53033,0
+7,Issaquah,7,Issaquah,53033,0
+8,Kent,8,Kent,53033,0
+9,Kirkland,9,Kirkland,53033,0
+10,Redmond,10,Redmond,53033,0
+11,Renton,11,Renton,53033,0
+12,SeaTac,12,SeaTac,53033,0
+13,Tukwila,13,Tukwila,53033,0
+14,Des Moines,14,Des Moines,53033,0
+15,Federal Way PAA,15,Federal Way PAA,53033,0
+16,Kenmore,16,Kenmore,53033,0
+17,Lake Forest Park,17,Lake Forest Park,53033,0
+18,Mercer Island,18,Mercer Island,53033,0
+19,Newcastle,19,Newcastle,53033,0
+20,North Highline,20,North Highline,53033,0
+22,Renton PAA - East Renton,22,Renton PAA - East Renton,53033,0
+23,Renton PAA - Fairwood,23,Renton PAA - Fairwood,53033,0
+24,Renton PAA - West Hill,24,Renton PAA - West Hill,53033,0
+25,Shoreline,25,Shoreline,53033,0
+26,Woodinville,26,Woodinville,53033,0
+27,Algona,27,Algona,53033,0
+28,Beaux Arts,28,Beaux Arts,53033,0
+29,Black Diamond,29,Black Diamond,53033,0
+30,Carnation,30,Carnation,53033,0
+31,Clyde Hill,31,Clyde Hill,53033,0
+32,Covington,32,Covington,53033,0
+33,Duvall,33,Duvall,53033,0
+34,Enumclaw,34,Enumclaw,53033,0
+35,Hunts Point,35,Hunts Point,53033,0
+36,Maple Valley,36,Maple Valley,53033,0
+37,Medina,37,Medina,53033,0
+38,Milton,38,Milton,53033,0
+39,Normandy Park,39,Normandy Park,53033,0
+40,North Bend,40,North Bend,53033,0
+41,Pacific,41,Pacific,53033,0
+42,Sammamish,42,Sammamish,53033,0
+43,Skykomish,43,Skykomish,53033,0
+44,Snoqualmie,44,Snoqualmie,53033,0
+45,Yarrow Point,45,Yarrow Point,53033,0
+46,Auburn PAA,46,Auburn PAA,53033,0
+48,Bellevue PAA,48,Bellevue PAA,53033,0
+49,Black Diamond PAA,49,Black Diamond PAA,53033,0
+51,Issaquah PAA,51,Issaquah PAA,53033,0
+52,Kent PAA,52,Kent PAA,53033,0
+53,King UGA,53,King UGA,53033,0
+57,Newcastle PAA,57,Newcastle PAA,53033,0
+58,Pacific PAA,58,Pacific PAA,53033,0
+60,Redmond PAA,60,Redmond PAA,53033,0
+61,Sammamish PAA,61,Sammamish PAA,53033,0
+64,King Rural,64,King Rural,53033,0
+65,Bremerton,65,Bremerton,53035,0
+67,Bremerton UGA,67,Bremerton UGA,53035,0
+68,Silverdale,68,Silverdale,53035,0
+69,Bainbridge Island,69,Bainbridge Island,53035,0
+70,Kingston UGA,70,Kingston UGA,53035,0
+71,Port Orchard,71,Port Orchard,53035,0
+72,Port Orchard UGA,72,Port Orchard UGA,53035,0
+73,Poulsbo,73,Poulsbo,53035,0
+74,Poulsbo PUTA,74,Poulsbo PUTA,53035,0
+75,Central Kitsap UGA,75,Central Kitsap UGA,53035,0
+76,Kitsap Rural,76,Kitsap Rural,53035,0
+77,Tacoma,77,Tacoma,53053,0
+78,Auburn,78,Auburn,53053,0
+79,Lakewood,79,Lakewood,53053,0
+80,Puyallup,80,Puyallup,53053,0
+81,University Place,81,University Place,53053,0
+82,DuPont,82,DuPont,53053,0
+83,Fife,83,Fife,53053,0
+84,Fircrest,84,Fircrest,53053,0
+85,"Mid-County, Parkland-Spanaway-Midland, South Hill",85,"Mid-County, Parkland-Spanaway-Midland, South Hill",53053,0
+86,Sumner,86,Sumner,53053,0
+87,Bonney Lake,87,Bonney Lake,53053,0
+88,Buckley,88,Buckley,53053,0
+89,Carbonado,89,Carbonado,53053,0
+90,Eatonville,90,Eatonville,53053,0
+91,Edgewood,91,Edgewood,53053,0
+92,Gig Harbor,92,Gig Harbor,53053,0
+93,Milton,93,Milton,53053,0
+94,Orting,94,Orting,53053,0
+95,Pacific,95,Pacific,53053,0
+96,Roy,96,Roy,53053,0
+97,Ruston,97,Ruston,53053,0
+98,South Prairie,98,South Prairie,53053,0
+99,Steilacoom,99,Steilacoom,53053,0
+100,Wilkeson,100,Wilkeson,53053,0
+107,Pierce UGA,107,Pierce UGA,53053,0
+124,Pierce Rural,124,Pierce Rural,53053,0
+125,Everett,125,Everett,53061,0
+126,Bothell,126,Bothell,53061,0
+127,Lynnwood,127,Lynnwood,53061,0
+128,Arlington,128,Arlington,53061,0
+129,Bothell MUGA,129,Bothell MUGA,53061,0
+130,Edmonds,130,Edmonds,53061,0
+131,Edmonds MUGA,131,Edmonds MUGA,53061,0
+132,Everett MUGA,132,Everett MUGA,53061,0
+133,Larch Way Overlap,133,Larch Way Overlap,53061,0
+135,Lynnwood MUGA,135,Lynnwood MUGA,53061,0
+136,Marysville,136,Marysville,53061,0
+138,Mill Creek,138,Mill Creek,53061,0
+139,Mill Creek MUGA,139,Mill Creek MUGA,53061,0
+140,Mountlake Terrace,140,Mountlake Terrace,53061,0
+141,Mukilteo,141,Mukilteo,53061,0
+142,Mukilteo MUGA,142,Mukilteo MUGA,53061,0
+143,Brier,143,Brier,53061,0
+144,Darrington,144,Darrington,53061,0
+145,Gold Bar,145,Gold Bar,53061,0
+146,Granite Falls,146,Granite Falls,53061,0
+147,Index,147,Index,53061,0
+148,Lake Stevens,148,Lake Stevens,53061,0
+149,Monroe,149,Monroe,53061,0
+150,Snohomish,150,Snohomish,53061,0
+151,Stanwood,151,Stanwood,53061,0
+152,Sultan,152,Sultan,53061,0
+153,Woodway,153,Woodway,53061,0
+155,Arlington UGA,155,Arlington UGA,53061,0
+156,Brier MUGA,156,Brier MUGA,53061,0
+157,Darrington UGA,157,Darrington UGA,53061,0
+158,Gold Bar UGA,158,Gold Bar UGA,53061,0
+159,Granite Falls UGA,159,Granite Falls UGA,53061,0
+161,Lake Stevens UGA,161,Lake Stevens UGA,53061,0
+162,Lake Stickney Gap,162,Lake Stickney Gap,53061,0
+163,Maltby UGA,163,Maltby UGA,53061,0
+164,Marysville UGA,164,Marysville UGA,53061,0
+166,Monroe UGA,166,Monroe UGA,53061,0
+167,Mountlake Terrace MUGA,167,Mountlake Terrace MUGA,53061,0
+168,Paine Field Area,168,Paine Field Area,53061,0
+169,Silver Firs Gap,169,Silver Firs Gap,53061,0
+170,Snohomish UGA,170,Snohomish UGA,53061,0
+172,Stanwood UGA,172,Stanwood UGA,53061,0
+174,Sultan UGA,174,Sultan UGA,53061,0
+175,Woodway MUGA,175,Woodway MUGA,53061,0
+176,Snohomish Rural,176,Snohomish Rural,53061,0
+62,King no growth UGA,201,King no growth UGA Bear Creek UPD,53033,1
+30,Carnation,202,Carnation UGA,53033,1
+32,Covington,203,Covington PAA,53033,1
+33,Duvall,204,Duvall UGA,53033,1
+34,Enumclaw,205,Enumclaw UGA,53033,1
+62,King no growth UGA,206,King no growth UGA Milton PAA,53033,1
+40,North Bend,207,North Bend UGA,53033,1
+44,Snoqualmie,208,Snoqualmie UGA,53033,1
+62,King no growth UGA,209,King no growth UGA Tukwila PAA,53033,1
+176,Snohomish Rural,210,Tulalip Tribe,53061,1
+64,King Rural,301,King Rural Ag & Resource,53033,1
+76,Kitsap Rural,302,Kitsap Rural Ag & Resource,53035,1
+124,Pierce Rural,303,Pierce Rural Ag & Resource,53053,1
+176,Snohomish Rural,304,Snohomish Rural Ag & Resource,53061,1
+65,Bremerton,401,NBK - Bremerton,53035,1
+76,Kitsap Rural,402,NBK - Bangor,53035,1
+107,Pierce UGA,403,JBLM - UGA,53053,1
+125,Everett,404,Naval Station Everett,53061,1
+124,Pierce Rural,405,JBLM - Rural,53053,1

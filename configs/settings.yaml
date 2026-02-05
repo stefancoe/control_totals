@@ -9,15 +9,6 @@ end_year: 2050 # final year for control totals output
 
 targets_end_year: 2044 # year for which growth targets are set
 
-rgids:
-  1: Metro
-  2: Core
-  3: HCT
-  4: CT
-  5: UU
-  6: Rural
-  8: Special Land Use
-
 
 #----------------------------
 # Hard coded King County gq, hhsz and vacancy rates by rgid
@@ -99,45 +90,54 @@ ElmerGeo: # database
 #     - county_id
 #    id_col: control_id # id column must be an integer
 
- - name: blocks
-   sql_table: BLOCK2020
+#  - name: blocks
+#    sql_table: BLOCK2020
+#    columns:
+#       - geoid20
+#    id_col: geoid20 # id column must be an integer
+
+ - name: parcel_pts
+   sql_table: PARCELS_URBANSIM_2018_PTS
    columns:
-      - geoid20
-   id_col: geoid20 # id column must be an integer
+      - parcel_id
+   id_col: parcel_id # id column must be an integer
+
 
 # pull all columns for Elmer instead of specifying columns
 Elmer: # database
- - name: ofm_estimates_2020 # name the table will be saved as in h5
-   sql_table: ofm.v_estimates_2020 # table in elmer
-   id_col: block_geoid # id column must be an integer
+#  - name: ofm_estimates_2020 # name the table will be saved as in h5
+#    sql_table: ofm.v_estimates_2020 # table in elmer
+#    id_col: block_geoid # id column must be an integer
 
- - name: ofm_estimates_2019
-   sql_table: ofm.v_estimates_2019
-   id_col: block_geoid # id column must be an integer
+#  - name: ofm_estimates_2019
+#    sql_table: ofm.v_estimates_2019
+#    id_col: block_geoid # id column must be an integer
+
+ - name: ofm_parcelized_2019
+   sql_table: ofm.parcelized_saep(2019, 2010)
+   id_col: parcel_id # id column must be an integer
+
+ - name: ofm_parcelized_2020
+   sql_table: ofm.parcelized_saep(2020, 2010)
+   id_col: parcel_id # id column must be an integer
 
 
 #----------------------------
 # tables to be read in from data folder
 #----------------------------
 data_tables:
- - name: control_target_lookup
-   file: control_target_lookup.csv
-
- - name: regional_geography_lookup
-   file: rgid_lookup.csv
-   id_col: rgid_22
+ - name: control_target_xwalk
+   file: control_target_xwalk.csv
 
  - name: ref_projection
    file: REF_projection.csv
 
- - name: employment_2019_by_regional_geography
+ - name: employment_2019_by_control_area
    file: Employment 2019.csv
-   id_col: RGid_22
    no_mil_res_con_col: TotEmpNoMil-ResCon # column name for employment excluding military, resource and construction
 
- - name: employment_2020_by_regional_geography
+ - name: employment_2020_by_control_area
    file: Employment 2020.csv
-   id_col: RGid_22
    no_mil_res_con_col: TotEmpNoMil-ResCon # column name for employment excluding military, resource and construction
 
 targets_tables:
@@ -185,14 +185,15 @@ shapefiles:
 steps:
 #  - steps.get_elmer_data # pulls data from elmer database and saves to hdf5
 #  - steps.get_census_data # pulls decennial census data from api and saves to hdf5
-#  - steps.load_shapefiles # loads shapefiles in data/shapefiles into hdf5
+ - steps.load_shapefiles # loads shapefiles in data/shapefiles into hdf5
 #  - steps.load_data # loads data from csv files into hdf5
 #  - steps.block_regional_geography_xwalk # creates block to regional geography crosswalk
+ - steps.parcel_control_area_xwalk # creates parcel to control area crosswalk
 #  - steps.prepare_block_data # aggregates block data (ofm and decennial) to regional geography level
- - steps.adjust_targets_to_base_year # adjusts targets to base year using ofm and employment data
+#  - steps.adjust_targets_to_base_year # adjusts targets to base year using ofm and employment data
 #  - steps.units_chg_targets # calculates targets that use housing unit change (only king county for now)
 #  - steps.total_pop_chg_targets # calculates targets that use total population change
- - steps.emp_chg_targets_res_con # calculates targets for counties that include resource and construction employment
- - steps.emp_chg_targets_no_res_con # calculates targets for counties that exclude resource and construction employment
+#  - steps.emp_chg_targets_res_con # calculates targets for counties that include resource and construction employment
+#  - steps.emp_chg_targets_no_res_con # calculates targets for counties that exclude resource and construction employment
 #  - steps.emp_chg_targets_no_res_con # calculates targets for counties that exclude resource and construction employment
 #  - steps.extrapolate_to_controls_year # extrapolates out to the control totals end year from the targets end year

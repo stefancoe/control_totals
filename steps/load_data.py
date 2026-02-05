@@ -63,9 +63,9 @@ def check_exists(chg_col,targets_table, type, data_table_names):
     if chg_col in targets_table:
         start_year = targets_table[chg_col]
         if type == 'emp':
-            table_name = f'employment_{start_year}_by_regional_geography'
+            table_name = f'employment_{start_year}_by_control_area'
         elif type == 'ofm':
-            table_name = f'ofm_estimates_{start_year}'
+            table_name = f'ofm_parcelized_{start_year}'
         if table_name not in data_table_names:
             raise ValueError(f"{type} data for start year {start_year} not found in data_tables in settings.yaml.")
 

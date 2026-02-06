@@ -96,11 +96,33 @@ ElmerGeo: # database
 #       - geoid20
 #    id_col: geoid20 # id column must be an integer
 
- - name: parcel_pts
-   sql_table: PARCELS_URBANSIM_2018_PTS
-   columns:
-      - parcel_id
-   id_col: parcel_id # id column must be an integer
+#  - name: parcel_pts
+#    sql_table: PARCELS_URBANSIM_2018_PTS
+#    columns:
+#       - parcel_id
+#    id_col: parcel_id # id column must be an integer
+
+ - name: regional_geographies
+   sql_table: REGIONAL_GEOGRAPHIES
+   columns: ['city_name','cnty_name','feat_type','juris','rgeo_class','class_desc']
+
+ - name: county
+   sql_table: COUNTY_BACKGROUND
+   columns: 
+    - county_fip
+    - psrc
+
+ - name: military_bases
+   sql_table: MILITARY_BASES
+   columns: ['milspn_id','name','psrc']
+
+ - name: tribal_land
+   sql_table: TRIBAL_LAND
+   columns: ['tribal_land']
+
+ - name: natural_resource
+   sql_table: NAT_RESOURCE
+   columns: ['resource']
 
 
 # pull all columns for Elmer instead of specifying columns
@@ -113,13 +135,13 @@ Elmer: # database
 #    sql_table: ofm.v_estimates_2019
 #    id_col: block_geoid # id column must be an integer
 
- - name: ofm_parcelized_2019
-   sql_table: ofm.parcelized_saep(2019, 2010)
-   id_col: parcel_id # id column must be an integer
+#  - name: ofm_parcelized_2019
+#    sql_table: ofm.parcelized_saep(2019, 2010)
+#    id_col: parcel_id # id column must be an integer
 
- - name: ofm_parcelized_2020
-   sql_table: ofm.parcelized_saep(2020, 2010)
-   id_col: parcel_id # id column must be an integer
+#  - name: ofm_parcelized_2020
+#    sql_table: ofm.parcelized_saep(2020, 2010)
+#    id_col: parcel_id # id column must be an integer
 
 
 #----------------------------
@@ -174,21 +196,21 @@ targets_tables:
 # shapefiles to be read in from data/shapefiles folder
 #----------------------------
 shapefiles:
- - name: regional_geography
-   file: reggeog_22_allnames_edit.shp
-   id_col: RGid_22
+#  - name: regional_geography
+#    file: reggeog_22_allnames_edit.shp
+#    id_col: RGid_22
 
 
 #----------------------------
 # Pypyr steps
 #----------------------------
 steps:
-#  - steps.get_elmer_data # pulls data from elmer database and saves to hdf5
+ - steps.get_elmer_data # pulls data from elmer database and saves to hdf5
 #  - steps.get_census_data # pulls decennial census data from api and saves to hdf5
- - steps.load_shapefiles # loads shapefiles in data/shapefiles into hdf5
+#  - steps.load_shapefiles # loads shapefiles in data/shapefiles into hdf5
 #  - steps.load_data # loads data from csv files into hdf5
 #  - steps.block_regional_geography_xwalk # creates block to regional geography crosswalk
- - steps.parcel_control_area_xwalk # creates parcel to control area crosswalk
+#  - steps.parcel_control_area_xwalk # creates parcel to control area crosswalk
 #  - steps.prepare_block_data # aggregates block data (ofm and decennial) to regional geography level
 #  - steps.adjust_targets_to_base_year # adjusts targets to base year using ofm and employment data
 #  - steps.units_chg_targets # calculates targets that use housing unit change (only king county for now)

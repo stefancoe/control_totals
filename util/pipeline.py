@@ -62,7 +62,7 @@ class Pipeline:
             h5store.put(table_name, df, format='table')
 
     def save_geodataframe(self, name, gdf):
-        gdf['geometry_wkt'] = gdf['geometry'].apply(lambda geom: geom.wkt)
+        gdf['geometry_wkt'] = gdf.geometry.to_wkt()
         gdf_to_save = gdf.drop(columns=['geometry'])
         self.save_table(name, gdf_to_save)
 
@@ -92,6 +92,8 @@ class Pipeline:
         if 'id_col' in table:
             id_col = table['id_col']
             df[id_col] = df[id_col].astype('int64')
+            return df
+        else:
             return df
 
 

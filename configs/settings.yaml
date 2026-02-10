@@ -206,6 +206,7 @@ shapefiles:
 #----------------------------
 steps:
  - steps.get_elmer_data # pulls data from elmer database and saves to hdf5
+ - steps.create_control_area_geography # creates control area geography by unioning and dissolving regional geographies, military bases, tribal areas, and natural resource areas together
 #  - steps.get_census_data # pulls decennial census data from api and saves to hdf5
 #  - steps.load_shapefiles # loads shapefiles in data/shapefiles into hdf5
 #  - steps.load_data # loads data from csv files into hdf5

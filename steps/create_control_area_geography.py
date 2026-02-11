@@ -1,5 +1,6 @@
 import pandas as pd
 import geopandas as gpd
+import numpy as np
 from util import Pipeline
 
 
@@ -14,15 +15,18 @@ def union_dissolve(primary_gdf, secondary_gdf, primary_id_col, secondary_id_col,
     name1: primary geodataframe name column
     name2: secondary geodataframe name column
     '''
+    # setup flags that will track which layer each polygon came from
     flags = ['reg','military','tribal','nr','jblm']
     flag_cols_1 = [col for col in flags if col in primary_gdf.columns]
-    print(flag_cols_1)
+    # copy only the needed columns
     gdf1 = primary_gdf[[primary_id_col,name1, 'geometry'] + flag_cols_1].copy()
+    # create a new index column
     gdf1[primary_id_col] = gdf1[primary_id_col].astype(str) + '_' + primary_id_col.split('_id')[0]
+    # set flag
     geog_flag = primary_id_col.split('_id')[0]
     gdf1[geog_flag] = 1
+    # copy secondary geodataframe with only needed columns and create new index column and flag
     flag_cols_2 = [col for col in flags if col in secondary_gdf.columns]
-    print(flag_cols_2)
     gdf2 = secondary_gdf[[secondary_id_col,name2, 'geometry'] + flag_cols_2].copy()
     gdf2[secondary_id_col] = gdf2[secondary_id_col].astype(str) + '_' + secondary_id_col.split('_id')[0]
 
@@ -38,13 +42,15 @@ def union_dissolve(primary_gdf, secondary_gdf, primary_id_col, secondary_id_col,
     # dissolve on primary id column
     gdf = gdf.dissolve(by=primary_id_col, as_index=False)
 
+    # create combined name and id columns for the new geographies, this will be used to track the lineage of the 
+    # geographies as they are unioned and dissolved together
     combined_layers = primary_id_col.split('_id')[0] + '_' + secondary_id_col.split('_id')[0]
     combined_name = combined_layers + '_name'
     combined_id = combined_layers + '_id'
-
     gdf[combined_name] = np.where(gdf[name1].notna(), gdf[name1], gdf[name2])
     gdf = gdf.reset_index(drop=True)
     gdf[combined_id] = gdf.index + 1
+    
     return gdf
 
 
@@ -76,9 +82,12 @@ def create_control_area_geography(pipeline):
     tribal['tribal_id'] = tribal.index + 1
     # natural resource areas (forest, mineral, agriculture)
     nat_resource = p.get_geodataframe('natural_resource').clip(county.dissolve()).dissolve('resource',as_index=False).reset_index(drop=True)
+    nat_resource = nat_resource.overlay(county)
+    nat_resource['resource'] = county['county_fip'] + nat_resource['resource']
     nat_resource['nr_id'] = nat_resource.index + 1
+    nat_resource = nat_resource[['nr_id','resource','geometry']]
 
-    # begin unioning and dissolving layers together, the order is important to preserve the original geometry of the primary layer.
+    # begin unioning and dissolving layers together, the order is important to preserve the original geometry of the primary input layer.
     gdf = union_dissolve(military, reg, 'military_id', 'reg_id','military_name','juris')
     
     # add jblm uga back in, this is the only area that overlaps with a military base but should be preserved as its own area
@@ -102,9 +111,30 @@ def create_control_area_geography(pipeline):
     gdf = union_dissolve(gdf,county,'nr_tribal_jblm_military_reg_id','county_id','nr_tribal_jblm_military_reg_name','county_fip')
     return gdf
 
+def add_control_ids(pipeline, gdf):
+    p = pipeline
+    # get existing control areas from elmer to bring in control ids from
+    control = p.get_geodataframe('control_areas')[['control_id', 'control_na', 'geometry']]
+    # explode multipart features and create a new index
+    gdf = gdf.explode(index_parts=False).reset_index(drop=True)
+    gdf['combined_id'] = gdf.index + 1
+    # turn into centroids and spatial join to the existing control areas
+    gdf_pts = gdf.copy()
+    gdf_pts['geometry'] = gdf_pts.representative_point()
+    gdf_pts = gdf_pts.sjoin(control, how='left')
+    # merge spatial joined results back to original geodataframe
+    gdf = gdf.merge(gdf_pts[['combined_id', 'control_id', 'control_na']], on='combined_id', how='left')
+    # fix JBLM UGA area
+    gdf.loc[gdf['jblm']==1, ['control_id', 'control_na']] = [405, 'JBLM UGA']
+    # dissolve on control id
+    gdf = gdf.dissolve('control_id', as_index=False)
+    return gdf
+
 def run_step(context):
     # pypyr step
     p = Pipeline(settings_path=context['configs_dir'])
     print("Creating control area geography and saving to HDF5...")
-    create_control_area_geography(p)
+    gdf = create_control_area_geography(p)
+    gdf = add_control_ids(p, gdf)
+    p.save_geodataframe('control_area_geography',gdf)
     return context

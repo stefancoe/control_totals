@@ -82,13 +82,13 @@ census_variables:
 #----------------------------
 # issues with pulling all columns from ElmerGeo, so columns need to be specified
 ElmerGeo: # database
-#  - name: control_areas # name the table will be saved as in h5
-#    sql_table: CONTROL18_DASHBOARD # table in elmer
-#    columns: # columns to pull from elmer
-#     - control_id
-#     - control_na
-#     - county_id
-#    id_col: control_id # id column must be an integer
+ - name: control_areas # name the table will be saved as in h5
+   sql_table: CONTROL18_DASHBOARD # table in elmer
+   columns: # columns to pull from elmer
+    - control_id
+    - control_na
+    - county_id
+   id_col: control_id # id column must be an integer
 
 #  - name: blocks
 #    sql_table: BLOCK2020
@@ -208,7 +208,6 @@ steps:
  - steps.get_elmer_data # pulls data from elmer database and saves to hdf5
  - steps.create_control_area_geography # creates control area geography by unioning and dissolving regional geographies, military bases, tribal areas, and natural resource areas together
 #  - steps.get_census_data # pulls decennial census data from api and saves to hdf5
-#  - steps.load_shapefiles # loads shapefiles in data/shapefiles into hdf5
 #  - steps.load_data # loads data from csv files into hdf5
 #  - steps.block_regional_geography_xwalk # creates block to regional geography crosswalk
 #  - steps.parcel_control_area_xwalk # creates parcel to control area crosswalk

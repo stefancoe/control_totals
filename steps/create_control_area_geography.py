@@ -114,7 +114,7 @@ def create_control_area_geography(pipeline):
 def add_control_ids(pipeline, gdf):
     p = pipeline
     # get existing control areas from elmer to bring in control ids from
-    control = p.get_geodataframe('control_areas')[['control_id', 'control_na', 'geometry']]
+    control = p.get_geodataframe('old_control_areas')[['control_id', 'control_na', 'geometry']]
     # explode multipart features and create a new index
     gdf = gdf.explode(index_parts=False).reset_index(drop=True)
     gdf['combined_id'] = gdf.index + 1
@@ -136,5 +136,5 @@ def run_step(context):
     print("Creating control area geography and saving to HDF5...")
     gdf = create_control_area_geography(p)
     gdf = add_control_ids(p, gdf)
-    p.save_geodataframe('control_area_geography',gdf)
+    p.save_geodataframe('control_areas',gdf)
     return context

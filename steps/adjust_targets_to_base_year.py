@@ -39,19 +39,18 @@ def sum_estimates_to_target_area(pipeline, year, target_type, table):
         emp_col = get_emp_no_mil_res_con_col(p, year)
         col_name = emp_col
         # get rgid column from employment table
-        rgid = p.get_id_col(f'{table}_{year}_by_regional_geography')
+        rgid = p.get_id_col(f'{table}_{year}_by_control_area')
     else:
         col_name = f'ofm_{target_type}'
-        # get rgid column from the regional geography shapefile since that was used to aggregate ofm and decennial
-        rgid = p.get_id_col('regional_geography')
+        # get rgid column from the control area shapefile since that was used to aggregate ofm and decennial
+        rgid = p.get_id_col('control_area')
 
-    # get regional geog to target lookup
-    regional_geog_lookup = p.get_table('regional_geography_lookup')
-    rg_lookup_id =p.get_id_col('regional_geography_lookup')
+    # get control area to target lookup
+    xwalk = p.get_table('control_target_xwalk')
     
-    # sum estimates by regional geographies
+    # sum estimates by target areas
     df = (
-        p.get_table(f'{table}_{year}_by_regional_geography')
+        p.get_table(f'{table}_{year}_by_control_area')
         # add year suffix to ofm column
         .rename(columns={f'{col_name}':f'{target_type}_{year}'})
         # join to target ids

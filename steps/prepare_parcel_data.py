@@ -1,28 +1,51 @@
+import pandas as pd
+from util import Pipeline
+
+
 def sum_ofm_by_control_area(pipeline):
     p = pipeline
-    dec = p.get_table('ofm_')
-    blk = p.get_table('block_regional_geography_xwalk')
-    block_id = p.get_id_col('blocks')
-    rgid = p.get_id_col('regional_geography')
 
-    # merge decennial data with block to control area crosswalk
-    df = dec.merge(blk, left_on='geoid', right_on=block_id)
+    # get ofm parcelized table list from settings
+    table_list = []
+    ofm_parcelized_tables = p.get_elmer_list()
+    for table in ofm_parcelized_tables:
+        if 'ofm_parcelized' in table['name']:
+            table_list.append(table['name'])
 
-    # get list of decennial census columns
-    dec_cols = list(p.settings['census_variables'].keys())
+    # load parcel to control area crosswalk
+    xwalk = p.get_table('parcel_control_area_xwalk')
 
-    # sum decennial data by control area
-    dec_by_control = (
-        df.groupby(rgid)
-        .sum()[dec_cols]
-        .astype(int)
-        .reset_index()
-    )
+    # loop through each ofm parcelized table and merge with the parcel to control area xwalk
+    for table in table_list:
+        df = (
+            p.get_table(table)
+            .merge(xwalk, on='parcel_id', how='left')
+        )
 
-    # calculate hhpop
-    dec_by_control['dec_hhpop'] = (
-        dec_by_control['dec_total_pop'] - dec_by_control['dec_gq']
-    )
+        # check to make sure each parcel has a control_id
+        if df.loc[df.control_id.isna()].empty == False:
+            raise ValueError("There are parcels that do not have a control_id \
+                            after merging with the parcel_control_area_xwalk. \
+                            Please investigate and fix the issue before proceeding.")
+        
+        # sum ofm data by control area
+        df = df.rename(
+            columns={
+                'total_pop': 'ofm_total_pop',
+                'household_pop': 'ofm_hhpop',
+                'housing_units': 'ofm_units',
+                'occupied_housing_units': 'ofm_hh',
+                'group_quarters': 'ofm_gq'
+            }
+        )
+        ofm_by_control = df[['control_id','ofm_total_pop', 'ofm_hhpop', 'ofm_units', 'ofm_hh', 'ofm_gq']].groupby('control_id').sum().reset_index()
 
-    # save to HDF5
-    p.save_table('decennial_by_regional_geography', dec_by_control)
+        # save to HDF5
+        p.save_table(f"{table}_by_control_area", ofm_by_control)
+
+def run_step(context):
+    # pypyr step
+    p = Pipeline(settings_path=context['configs_dir'])
+    print("Aggregating parcelized ofm data to control_area...")
+    sum_ofm_by_control_area(p)
+    return context

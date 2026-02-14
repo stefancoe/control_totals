@@ -79,7 +79,15 @@ class Pipeline:
         return df
     
     def get_id_col(self, table_name):
-        table_list = self.get_elmer_geo_list() + self.get_elmer_list() + self.get_data_table_list() + self.get_shapefile_list()
+        table_list = []
+        for table_group in [
+            self.get_elmer_geo_list(),
+            self.get_elmer_list(),
+            self.get_data_table_list(),
+            self.get_shapefile_list(),
+        ]:
+            if table_group is not None:
+                table_list += table_group
         for table in table_list:
             if table.get('name') == table_name:
                 if 'id_col' in table:

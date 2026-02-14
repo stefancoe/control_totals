@@ -11,7 +11,7 @@ def create_block_control_area_xwalk(pipeline):
     blk_id = p.get_id_col('blocks')
 
     # load control areas geodataframe from h5
-    control_areas = p.get_geodataframe('control_area')
+    control_areas = p.get_geodataframe('control_areas')
     
     # convert blocks to centroids
     blk_pts = blk.copy()

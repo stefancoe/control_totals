@@ -10,10 +10,8 @@ def create_parcel_control_area_xwalk(pipeline):
     parcel_pts = p.get_geodataframe('parcel_pts')
     parcel_id = p.get_id_col('parcel_pts')
 
-    # load regional geographies geodataframe from h5
-    regional_geography = p.get_geodataframe('regional_geography')
-    # dissolve on control_id to get control areas
-    control_areas = regional_geography.dissolve('control_id').reset_index()[['control_id', 'geometry']]
+    # load control areas geodataframe from h5
+    control_areas = p.get_geodataframe('control_areas')[['control_id', 'geometry']]
 
     # spatial join parcel centroids to get control_id for each parcel
     # uses sjoin_nearest to handle edge cases where centroids fall just outside control areas

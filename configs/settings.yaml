@@ -4,7 +4,7 @@
 data_dir: data
 output_dir: output
 
-base_year: 2024 
+base_year: 2020 
 end_year: 2050 # final year for control totals output
 
 targets_end_year: 2044 # year for which growth targets are set
@@ -212,12 +212,12 @@ steps:
 #  - steps.get_elmer_data # pulls data from elmer database and saves to hdf5
 #  - steps.create_control_area_geography # creates control area geography by unioning and dissolving regional geographies, military bases, tribal areas, and natural resource areas together
 #  - steps.get_census_data # pulls decennial census data from api and saves to hdf5
-#  - steps.load_data # loads data from csv files into hdf5
+ - steps.load_data # loads data from csv files into hdf5
 #  - steps.block_control_area_xwalk # creates block to control area crosswalk
 #  - steps.parcel_control_area_xwalk # creates parcel to control area crosswalk
- - steps.prepare_parcel_data # aggregates parcel data to control area
+#  - steps.prepare_parcel_data # aggregates parcel data to control area
 #  - steps.prepare_block_data # aggregates decennial block data to control area
-#  - steps.adjust_targets_to_base_year # adjusts targets to base year using ofm and employment data
+ - steps.adjust_targets_to_base_year # adjusts targets to base year using ofm and employment data
 #  - steps.units_chg_targets # calculates targets that use housing unit change (only king county for now)
 #  - steps.total_pop_chg_targets # calculates targets that use total population change
 #  - steps.emp_chg_targets_res_con # calculates targets for counties that include resource and construction employment

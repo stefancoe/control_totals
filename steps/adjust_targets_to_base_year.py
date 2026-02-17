@@ -5,7 +5,7 @@ from util import Pipeline
 def get_emp_no_mil_res_con_col(pipeline, year):
     # get column name for employment excluding military, resource and construction
     p = pipeline
-    table_name = f'employment_{year}_by_regional_geography'
+    table_name = f'employment_{year}_by_control_area'
     for table in p.settings['data_tables']:
         if table['name'] == table_name:
             if 'no_mil_res_con_col' not in table or not table['no_mil_res_con_col']:
@@ -38,12 +38,8 @@ def sum_estimates_to_target_area(pipeline, year, target_type, table):
         # get column name for employment excluding military, resource and construction
         emp_col = get_emp_no_mil_res_con_col(p, year)
         col_name = emp_col
-        # get rgid column from employment table
-        rgid = p.get_id_col(f'{table}_{year}_by_control_area')
     else:
         col_name = f'ofm_{target_type}'
-        # get rgid column from the control area shapefile since that was used to aggregate ofm and decennial
-        rgid = p.get_id_col('control_area')
 
     # get control area to target lookup
     xwalk = p.get_table('control_target_xwalk')
@@ -54,7 +50,7 @@ def sum_estimates_to_target_area(pipeline, year, target_type, table):
         # add year suffix to ofm column
         .rename(columns={f'{col_name}':f'{target_type}_{year}'})
         # join to target ids
-        .merge(regional_geog_lookup[[rg_lookup_id, 'target_id']], left_on=rgid, right_on=rg_lookup_id, how='left')
+        .merge(xwalk[['control_id', 'target_id']], on='control_id', how='left')
         # groupby sum to target id
         .groupby('target_id').sum().reset_index()
         # return only target id and needed ofm column
@@ -124,7 +120,7 @@ def adjust_targets(pipeline, target_type, table):
 def run_step(context):
     p = Pipeline(settings_path=context['configs_dir'])
     print("Adjusting targets to base year using OFM and Employment estimates...")
-    adjust_targets(p,'units','ofm_estimates')
-    adjust_targets(p,'total_pop','ofm_estimates')
+    adjust_targets(p,'units','ofm_parcelized')
+    adjust_targets(p,'total_pop','ofm_parcelized')
     adjust_targets(p,'emp','employment')
     return context

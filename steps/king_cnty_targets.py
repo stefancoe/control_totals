@@ -23,14 +23,14 @@ def calc_by_rgid(pipeline, targets_df):
     hhsz_horizon_col = f'hhsz_{targets_end_year}'
     
     #group by rgid to get totals for each rgid
-    df = targets_df.drop(columns=['target_id','start','county_id']).groupby('RGID').sum().reset_index()
+    df = targets_df.drop(columns=['target_id','start','county_id']).groupby('rgid').sum().reset_index()
 
     # load hard coded king county hhsz and vacancy rates
     king_hhsz, king_vac_rates = load_hhsz_vacancy_rates(p)
 
     # add hhsz and vacancy rate using hard coded rates from settings.yaml
-    df[hhsz_horizon_col] = df['RGID'].map(king_hhsz)
-    df['vacancy_rate'] = df['RGID'].map(king_vac_rates)
+    df[hhsz_horizon_col] = df['rgid'].map(king_hhsz)
+    df['vacancy_rate'] = df['rgid'].map(king_vac_rates)
 
 
     # calcuate horizon year units
@@ -65,10 +65,10 @@ def calc_by_target_area(pipeline, df, targets_rgid):
     king_hhsz_adj = king_hhsz.copy()
     king_hhsz_adj[1] = king_metro_adj_hhsz
     # map adjusted hhsz to df
-    df['king_hhsz'] = df['RGID'].map(king_hhsz_adj)
+    df['king_hhsz'] = df['rgid'].map(king_hhsz_adj)
 
     # map vacancy rates to df
-    df['vacancy_rate'] = df['RGID'].map(king_vac_rates)
+    df['vacancy_rate'] = df['rgid'].map(king_vac_rates)
 
     # load target horizon year and set column names for target horizon year
     targets_end_year = p.settings['targets_end_year']
@@ -85,6 +85,7 @@ def calc_by_target_area(pipeline, df, targets_rgid):
     df[hh_horizon_col] = (df[units_horizon_col] * (1 - df['vacancy_rate']/100)).round(0).astype(int)
 
     # calculate adjusted hhsz
+    df['dec_hhsz_by_rgid'] = df.groupby('rgid')['dec_hhpop'].transform('sum') / df.groupby('rgid')['dec_hh'].transform('sum')
     df[hhsz_horizon_col] = df['king_hhsz'] / df['dec_hhsz_by_rgid'] * df['dec_hhsz']
 
     # if hhsz is greater than 5, use original value
@@ -95,14 +96,14 @@ def calc_by_target_area(pipeline, df, targets_rgid):
 
     # sum initial hhpop by rgid and add as a column
     hhpop_horizon_sum_by_rgid_col = f'initial_hhpop_{targets_end_year}_sum_by_rgid'
-    df[hhpop_horizon_sum_by_rgid_col] = df.groupby('RGID')[hhpop_init_horizon_col].transform('sum')
+    df[hhpop_horizon_sum_by_rgid_col] = df.groupby('rgid')[hhpop_init_horizon_col].transform('sum')
 
     # merge factored hhpop by rgid to df
     df = (
-        df.merge(targets_rgid[['RGID', hhpop_factored_horizon_col]]
+        df.merge(targets_rgid[['rgid', hhpop_factored_horizon_col]]
                 .rename(columns={
                     hhpop_factored_horizon_col: f'hhpop_rgid_factored_{targets_end_year}'
-                    }), on='RGID', how='left')
+                    }), on='rgid', how='left')
     )
 
     # calculate factored hhpop for target horizon year

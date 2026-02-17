@@ -5,14 +5,14 @@ def load_input_tables(pipeline,targets_type):
 
     p = pipeline
     # load control to target lookup
-    control_target_lookup = p.get_table('control_target_lookup')
+    control_target_lookup = p.get_table('control_target_xwalk')
 
     # sum decennial data to target areas
     dec = (
         p.get_table('decennial_by_control_area')
         .merge(control_target_lookup, on='control_id', how='left')
-        .groupby(['target_id','RGID','county_id']).sum().reset_index()
-        .drop(columns=['control_id','name'])
+        .groupby(['target_id','county_id','rgid']).sum().reset_index()
+        .drop(columns=['control_id','name','target_name','control_name','exclude_from_target'], errors='ignore')
     )
 
     # merge decennial data with adjusted targets
@@ -21,10 +21,10 @@ def load_input_tables(pipeline,targets_type):
         .merge(dec, on='target_id', how='left')
     )
 
-    # calculate decennial household population, households and household size by rgid
-    df['dec_hhpop_by_rgid'] = df.groupby('RGID')['dec_hhpop'].transform('sum')
-    df['dec_hh_by_rgid'] = df.groupby('RGID')['dec_hh'].transform('sum')
-    df['dec_hhsz_by_rgid'] = df['dec_hhpop_by_rgid'] / df['dec_hh_by_rgid']
+    # calculate decennial household population, households and household size by target area
+    df['dec_hhpop_by_target'] = df.groupby('target_id')['dec_hhpop'].transform('sum')
+    df['dec_hh_by_target'] = df.groupby('target_id')['dec_hh'].transform('sum')
+    df['dec_hhsz_by_target'] = df['dec_hhpop_by_target'] / df['dec_hh_by_target']
 
     # calculate decennial hhsz
     df['dec_hhsz'] = df['dec_hhpop'] / df['dec_hh']
@@ -55,17 +55,14 @@ def load_base_year_emp(pipeline,emp_target_type):
     base_year = p.settings['base_year']
     counties = p.settings['emp_target_types'][emp_target_type]
 
-    emp = p.get_table(f'employment_{base_year}_by_regional_geography')
-    rgid = p.get_id_col(f'employment_{base_year}_by_regional_geography')
+    emp = p.get_table(f'employment_{base_year}_by_control_area')
 
-    rg_lookup_id = p.get_id_col('regional_geography_lookup')
-    regional_geog_lookup = p.get_table('regional_geography_lookup')[[rg_lookup_id,'target_id','county_id']]
+    control_area_lookup = p.get_table('control_target_xwalk')[['control_id','target_id','county_id']]
 
     emp = (
-        emp.merge(regional_geog_lookup, left_on=rgid, right_on=rg_lookup_id, how='left')
+        emp.merge(control_area_lookup, on='control_id', how='left')
         .query(f'county_id in {counties}')
         .groupby(['target_id','county_id']).sum()
-        .drop(columns=[rgid, rg_lookup_id])
         .add_suffix(f'_{base_year}')
         .reset_index()
     )

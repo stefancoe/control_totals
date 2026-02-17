@@ -217,10 +217,9 @@ steps:
 #  - steps.parcel_control_area_xwalk # creates parcel to control area crosswalk
 #  - steps.prepare_parcel_data # aggregates parcel data to control area
 #  - steps.prepare_block_data # aggregates decennial block data to control area
- - steps.adjust_targets_to_base_year # adjusts targets to base year using ofm and employment data
-#  - steps.units_chg_targets # calculates targets that use housing unit change (only king county for now)
+#  - steps.adjust_targets_to_base_year # adjusts targets to base year using ofm and employment data
+#  - steps.king_cnty_targets # calculates targets that use housing unit change (only king county for now)
 #  - steps.total_pop_chg_targets # calculates targets that use total population change
-#  - steps.emp_chg_targets_res_con # calculates targets for counties that include resource and construction employment
-#  - steps.emp_chg_targets_no_res_con # calculates targets for counties that exclude resource and construction employment
-#  - steps.emp_chg_targets_no_res_con # calculates targets for counties that exclude resource and construction employment
-#  - steps.extrapolate_to_controls_year # extrapolates out to the control totals end year from the targets end year
+ - steps.emp_chg_targets_res_con # calculates targets for counties that include resource and construction employment
+ - steps.emp_chg_targets_no_res_con # calculates targets for counties that exclude resource and construction employment
+ - steps.extrapolate_to_controls_year # extrapolates out to the control totals end year from the targets end year

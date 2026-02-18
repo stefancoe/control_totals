@@ -108,7 +108,7 @@ def calc_by_target_area(pipeline, df, targets_rgid):
 
     # calculate factored hhpop for target horizon year
     df['hhpop_factor'] = df[f'hhpop_rgid_factored_{targets_end_year}'] / df[hhpop_horizon_sum_by_rgid_col]
-    df[hhpop_factored_horizon_col] = (df[hhpop_init_horizon_col] * df['hhpop_factor']).round(0).astype(int)
+    df[f'hhpop_{targets_end_year}'] = (df[hhpop_init_horizon_col] * df['hhpop_factor']).round(0).astype(int)
     return df
 
 
@@ -117,7 +117,7 @@ def calc_gq_tot_pop(pipeline, df, dec):
     p = pipeline
     # load target horizon year and set column names for target horizon year
     targets_end_year = p.settings['targets_end_year']
-    hhpop_factored_horizon_col = f'hhpop_factored_{targets_end_year}'
+    hhpop_factored_horizon_col = f'hhpop_{targets_end_year}'
 
     # calculate GQ for target areas
     df = calc_gq(p, df, dec, targets_end_year)

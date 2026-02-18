@@ -45,7 +45,7 @@ def calc_gq(pipeline, df, dec, horizon_year):
 
     # calculate target area GQ for horizon year as a percentage of the regional GQ from REF
     gq_horizon_col = f'gq_{horizon_year}'
-    df[gq_horizon_col] = (df['dec_gq_pct'] * reg_gq_horizon).round(0).astype(int)
+    df[gq_horizon_col] = (df['dec_gq_pct'] * reg_gq_horizon).fillna(0).round(0).astype(int)
     return df
 
 

@@ -160,11 +160,9 @@ data_tables:
 
  - name: employment_2019_by_control_area
    file: Employment 2019.csv
-   no_mil_res_con_col: TotEmpNoMil-ResCon # column name for employment excluding military, resource and construction
 
  - name: employment_2020_by_control_area
    file: Employment 2020.csv
-   no_mil_res_con_col: TotEmpNoMil-ResCon # column name for employment excluding military, resource and construction
 
 targets_tables:
  - name: king_targets
@@ -223,4 +221,4 @@ steps:
  - steps.emp_chg_targets_res_con # calculates targets for counties that include resource and construction employment
  - steps.emp_chg_targets_no_res_con # calculates targets for counties that exclude resource and construction employment
  - steps.extrapolate_to_controls_year # extrapolates out to the control totals end year from the targets end year
-#  - steps.create_controls # creates final control totals table by bringing in the non-growth areas
+ - steps.create_controls # creates final control totals table by bringing in the non-growth areas

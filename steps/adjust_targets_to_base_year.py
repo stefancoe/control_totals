@@ -2,18 +2,6 @@ import pandas as pd
 from util import Pipeline
 
 
-def get_emp_no_mil_res_con_col(pipeline, year):
-    # get column name for employment excluding military, resource and construction
-    p = pipeline
-    table_name = f'employment_{year}_by_control_area'
-    for table in p.settings['data_tables']:
-        if table['name'] == table_name:
-            if 'no_mil_res_con_col' not in table or not table['no_mil_res_con_col']:
-                raise ValueError(f"'no_mil_res_con_col' not specified in settings for table '{table_name}'")
-            return table['no_mil_res_con_col']
-    raise ValueError(f"Table '{table_name}' not found in settings")
-
-
 def combine_targets(pipeline, target_type):
     # target_type: 'total_pop' or 'units', or 'emp'
     df = pd.DataFrame()
@@ -36,7 +24,7 @@ def sum_estimates_to_target_area(pipeline, year, target_type, table):
     
     if target_type == 'emp':
         # get column name for employment excluding military, resource and construction
-        emp_col = get_emp_no_mil_res_con_col(p, year)
+        emp_col = 'TotEmpNoMil-ResCon'
         col_name = emp_col
     else:
         col_name = f'ofm_{target_type}'
@@ -114,7 +102,6 @@ def adjust_targets(pipeline, target_type, table):
     table_name = f'adjusted_{target_type}_change_targets'
     out_df = df[['target_id','start',chg_col,chg_adj_col]]
     p.save_table(table_name,out_df)
-
 
 
 def run_step(context):

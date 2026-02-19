@@ -135,6 +135,10 @@ Elmer: # database
 #    sql_table: ofm.v_estimates_2019
 #    id_col: block_geoid # id column must be an integer
 
+ - name: ofm_parcelized_2018
+   sql_table: ofm.parcelized_saep(2024, 2018) # (vintage year, estimate year)
+   id_col: parcel_id # id column must be an integer
+
  - name: ofm_parcelized_2019
    sql_table: ofm.parcelized_saep(2024, 2019) # (vintage year, estimate year)
    id_col: parcel_id # id column must be an integer
@@ -157,6 +161,9 @@ data_tables:
 
  - name: ref_projection
    file: REF_projection.csv
+
+ - name: employment_2018_by_control_area
+   file: Employment 2018.csv
 
  - name: employment_2019_by_control_area
    file: Employment 2019.csv
@@ -210,15 +217,16 @@ steps:
 #  - steps.get_elmer_data # pulls data from elmer database and saves to hdf5
 #  - steps.create_control_area_geography # creates control area geography by unioning and dissolving regional geographies, military bases, tribal areas, and natural resource areas together
 #  - steps.get_census_data # pulls decennial census data from api and saves to hdf5
- - steps.load_data # loads data from csv files into hdf5
+#  - steps.load_data # loads data from csv files into hdf5
 #  - steps.block_control_area_xwalk # creates block to control area crosswalk
 #  - steps.parcel_control_area_xwalk # creates parcel to control area crosswalk
 #  - steps.prepare_parcel_data # aggregates parcel data to control area
 #  - steps.prepare_block_data # aggregates decennial block data to control area
- - steps.adjust_targets_to_base_year # adjusts targets to base year using ofm and employment data
- - steps.king_cnty_targets # calculates targets that use housing unit change (only king county for now)
- - steps.total_pop_chg_targets # calculates targets that use total population change
- - steps.emp_chg_targets_res_con # calculates targets for counties that include resource and construction employment
- - steps.emp_chg_targets_no_res_con # calculates targets for counties that exclude resource and construction employment
- - steps.extrapolate_to_controls_year # extrapolates out to the control totals end year from the targets end year
- - steps.create_controls # creates final control totals table by bringing in the non-growth areas
+#  - steps.adjust_targets_to_base_year # adjusts targets to base year using ofm and employment data
+#  - steps.king_cnty_targets # calculates targets that use housing unit change (only king county for now)
+#  - steps.total_pop_chg_targets # calculates targets that use total population change
+#  - steps.emp_chg_targets_res_con # calculates targets for counties that include resource and construction employment
+#  - steps.emp_chg_targets_no_res_con # calculates targets for counties that exclude resource and construction employment
+#  - steps.extrapolate_to_controls_year # extrapolates out to the control totals end year from the targets end year
+#  - steps.create_controls # creates final control totals table by bringing in the non-growth areas
+ - steps.run_r_scripts # runs r scripts to create interpolate interim contols totals years

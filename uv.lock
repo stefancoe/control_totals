@@ -245,6 +245,7 @@ dependencies = [
     { name = "census" },
     { name = "folium" },
     { name = "geopandas" },
+    { name = "iteround" },
     { name = "mapclassify" },
     { name = "matplotlib" },
     { name = "openpyxl" },
@@ -265,6 +266,7 @@ requires-dist = [
     { name = "census", specifier = ">=0.8.25" },
     { name = "folium", specifier = ">=0.20.0" },
     { name = "geopandas", specifier = ">=1.1.2" },
+    { name = "iteround", specifier = ">=1.0.4" },
     { name = "mapclassify", specifier = ">=2.10.0" },
     { name = "matplotlib", specifier = ">=3.10.8" },
     { name = "openpyxl", specifier = ">=3.1.5" },
@@ -433,6 +435,14 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/6f/6d/0703ccc57f3a7233505399edb88de3cbd678da106337b9fcde432b65ed60/idna-3.11.tar.gz", hash = "sha256:795dafcc9c04ed0c1fb032c2aa73654d8e8c5023a7df64a53f39190ada629902", size = 194582, upload-time = "2025-10-12T14:55:20.501Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/0e/61/66938bbb5fc52dbdf84594873d5b51fb1f7c7794e9c0f5bd885f30bc507b/idna-3.11-py3-none-any.whl", hash = "sha256:771a87f49d9defaf64091e6e6fe9c18d4833f140bd19464795bc32d966ca37ea", size = 71008, upload-time = "2025-10-12T14:55:18.883Z" },
+]
+
+[[package]]
+name = "iteround"
+version = "1.0.4"
+source = { registry = "https://pypi.org/simple" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/26/c7/68d920f791cd99919d82dd6db9fc0aca3790dc8d67c69b559a447ca2a914/iteround-1.0.4-py3-none-any.whl", hash = "sha256:17947dd5479177e6fb186b0a3d5d594b55eedea14dc722c6da7e84bbed45f5b2", size = 7333, upload-time = "2022-04-20T21:03:46.817Z" },
 ]
 
 [[package]]

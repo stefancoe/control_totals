@@ -152,6 +152,6 @@ target_id,target_name,control_id,control_name,county_id,exclude_from_target,rgid
 176,Snohomish Rural,304,Snohomish Rural Ag & Resource,53061,1,6
 65,Bremerton,401,NBK - Bremerton,53035,1,1
 76,Kitsap Rural,402,NBK - Bangor,53035,1,6
-107,Pierce UGA,403,JBLM - UGA,53053,1,5
+107,Pierce UGA,405,JBLM - UGA,53053,1,5
 125,Everett,404,Naval Station Everett,53061,1,1
-124,Pierce Rural,405,JBLM - Rural,53053,1,6
+124,Pierce Rural,403,JBLM - Rural,53053,1,6

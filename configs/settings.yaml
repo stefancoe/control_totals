@@ -124,6 +124,14 @@ ElmerGeo: # database
    sql_table: NAT_RESOURCE
    columns: ['resource']
 
+ - name: national_forest
+   sql_table: NATIONAL_FOREST
+   columns: ['forest_name']
+
+ - name: national_park
+   sql_table: NATIONAL_PARK
+   columns: ['park_name']
+
 
 # pull all columns for Elmer instead of specifying columns
 Elmer: # database
@@ -158,6 +166,12 @@ Elmer: # database
 data_tables:
  - name: control_target_xwalk
    file: control_target_xwalk.csv
+
+ - name: regional_geographies_xwalk
+   file: regional_geographies_control_id_xwalk.csv
+
+ - name: military_bases_xwalk
+   file: military_bases_control_id_xwalk.csv
 
  - name: ref_projection
    file: REF_projection.csv
@@ -215,7 +229,7 @@ shapefiles:
 #----------------------------
 steps:
 #  - steps.get_elmer_data # pulls data from elmer database and saves to hdf5
-#  - steps.create_control_area_geography # creates control area geography by unioning and dissolving regional geographies, military bases, tribal areas, and natural resource areas together
+ - steps.create_control_area_geography # creates control area geography by unioning and dissolving regional geographies, military bases, tribal areas, and natural resource areas together
 #  - steps.get_census_data # pulls decennial census data from api and saves to hdf5
 #  - steps.load_data # loads data from csv files into hdf5
 #  - steps.block_control_area_xwalk # creates block to control area crosswalk
@@ -229,4 +243,4 @@ steps:
 #  - steps.emp_chg_targets_no_res_con # calculates targets for counties that exclude resource and construction employment
 #  - steps.extrapolate_to_controls_year # extrapolates out to the control totals end year from the targets end year
 #  - steps.create_controls # creates final control totals table by bringing in the non-growth areas
- - steps.run_r_scripts # runs r scripts to create interpolate interim contols totals years
+#  - steps.run_r_scripts # runs r scripts to create interpolate interim contols totals years

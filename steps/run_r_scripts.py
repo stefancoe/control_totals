@@ -1,8 +1,8 @@
 import subprocess
 
 
-def run_step(context):
-    command = ['Rscript', 'r_scripts/run_creating_control_totals_from_targets.R']
+def run_r_script(script_path):
+    command = ['Rscript', script_path]
 
     # Run the command and capture the output
     try:
@@ -13,5 +13,9 @@ def run_step(context):
         print('R ERROR:\n', e.stderr)
     except FileNotFoundError:
         print("Error: Rscript not found. Make sure R is installed and in your system's PATH.")
-    
+
+
+def run_step(context):
+    run_r_script('r_scripts/run_creating_control_totals_from_targets.R')
+    run_r_script('r_scripts/split_ct_to_hct.R')
     return context

@@ -21,7 +21,7 @@ ref.base.year <- 2018  # first year in the dataset
 REFCTtable.name <- NULL # use this if no scaling is desired
 
 # name of the file with all targets (can be Excel or csv file)
-target.file <- "control_id_working_20260219.xlsx"
+target.file <- "control_id_working.xlsx"
 # if the above file is an Excel file, which sheet contains the city-level targets
 #target.sheet <- "control_id_working"
 target.sheet <- 1
@@ -29,10 +29,10 @@ target.sheet <- 1
 # OUTPUTS
 # name of the output file
 output.file.suffix <- if(is.null(REFCTtable.name)) "NoScale" else ""
-output.file.name <- paste0("TargetsRebasedOutput", output.file.suffix, "-", Sys.Date(), ".xlsx")
+output.file.name <- paste0("TargetsRebasedOutput", output.file.suffix, ".xlsx")
 # name of the output file with the interpolated control totals
 #ct.output.file.name <- paste0("Control-Totals-LUVit", output.file.suffix, "-", Sys.Date(), ".xlsx")
-ct.output.file.name <- paste0("Control-Totals-LUVit-", Sys.Date(), ".xlsx")
+ct.output.file.name <- paste0("Control-Totals-LUVit", ".xlsx")
 
 # for running on Hana's Mac; normally comment out
 #source("hanas_paths.R") 

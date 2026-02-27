@@ -26,17 +26,17 @@ setwd("C:/Users/jkolberg/PythonProjects/control_totals/r_scripts")
 # Full name of the input file containing the control totals (sheets with not unrolled CTs)
 # This is the output of run_creating_control_totals_from_targets.R from the link above
 #CT.file <- '~/psrc/R/control-total-vision2050/Control-Totals-LUVit-2022-11-15.xlsx' # BY 2018
-CT.file <- 'Control-Totals-LUVit-2026-02-19.xlsx' # BY 2023
+CT.file <- 'Control-Totals-LUVit.xlsx' # BY 2023
 
 # parcel-level capacity file
 # generated via https://github.com/psrc/urbansimRtools/blob/master/capacity/parcels_capacity.R
 #capacity.file <- '~/psrc/R/urbansimRtools/capacity/CapacityPcl_res50-2023-01-11.csv' # BY 2018
 #capacity.file <- '~/psrc/R/urbansimRtools/capacity/CapacityPclNoSampling_res50-2025-06-03.csv' # BY 2023
-capacity.file <- '~/psrc/R/urbansimRtools/capacity/CapacityPclNoSampling_res50-2025-06-17_hb1110.csv' # BY 2023 with HB1110
+capacity.file <- 'CapacityPclNoSampling_res50.csv'
   
 output.dir <- "C:/Users/jkolberg/PythonProjects/control_totals/data"
 output.suffix <- paste0("-", Sys.Date())  # uniquely identify results from this split  
-output.suffix <- paste0("_hb1110-", Sys.Date()) 
+# output.suffix <- paste0("_hb1110-", Sys.Date()) 
 
 save.results <- TRUE      # should results be stored in an Excel file
 results.file.name.prefix <- file.path(output.dir, paste0("LUVit_ct_by_tod_generator", output.suffix))  # only used if save.results is TRUE
@@ -62,7 +62,7 @@ scenarios <- list(list(HH = c(10, 10, 10), Emp = c(10, 10, 10), HHPop = NA)#,
 
 step <- c(1, 0.5, 0.25) # increments for scaling the iterative increase for RGs 1, 2, 3 (i.e. RG=1 grows the fastest)
 
-use.mysql <- FALSE  # if FALSE, base data are taken from base.data.file. 
+use.mysql <- TRUE  # if FALSE, base data are taken from base.data.file. 
                    # Set this to TRUE if run for the first time or if there is change in the DB.
 base.db <- paste0(base.year, "_parcel_baseyear") # used if use.mysql is TRUE
 

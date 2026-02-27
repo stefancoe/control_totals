@@ -105,8 +105,7 @@ def save_r_scrpt_inputs(pipeline, control_totals_df):
     # take last 2 digits of county id
     df['county_id'] = df['county_id'].astype(str).str[-2:].astype(int)
     # export final table to excel for r script input
-    today = pd.Timestamp.today().strftime('%Y%m%d')
-    df.to_excel(f'data/control_id_working_{today}.xlsx', index=False)
+    df.to_excel('data/control_id_working.xlsx', index=False)
 
     return df
 

@@ -243,4 +243,5 @@ steps:
 #  - steps.emp_chg_targets_no_res_con # calculates targets for counties that exclude resource and construction employment
 #  - steps.extrapolate_to_controls_year # extrapolates out to the control totals end year from the targets end year
 #  - steps.create_controls # creates final control totals table by bringing in the non-growth areas
+ - steps.run_parcel_capacity_r_script # runs r script to create parcel capacity files used by Hana's R scripts
 #  - steps.run_r_scripts # runs r scripts to create interpolate interim contols totals years

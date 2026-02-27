@@ -31,21 +31,42 @@ def load_input_tables(pipeline,targets_type):
 
     return df, dec
 
+def get_base_data_column(base_data_source,col):
+    if base_data_source == 'decennial':
+        return f'dec_{col}'
+    elif base_data_source == 'OFM':
+        return f'ofm_{col}'
+    else:
+        raise ValueError("base_data_source must be either 'decennial' or 'OFM'")
 
-def calc_gq(pipeline, df, dec, horizon_year):
+def calc_gq(pipeline, df, region_df, horizon_year, base_data_source='decennial'):
+    '''
+    Calculate group quarters population for target areas in the horizon year based on
+    the percentage of the region's GQ population in the decennial or OFM data and the
+    regional GQ population in the horizon year from the Regional Economic Forecast.
+    Parameters:
+    pipeline: Pipeline object
+    df: DataFrame with currently selected target areas and decennial or OFM GQ population
+    region_df: DataFrame with regional decennial or OFM GQ population
+    horizon_year: int, the year for which to calculate GQ population
+    base_data_source: str, either 'decennial' or 'OFM' indicating the source of base data
+    '''
+    gq_col = get_base_data_column(base_data_source,'gq')
+    gq_pct_col = get_base_data_column(base_data_source,'gq_pct')
+
     p = pipeline
 
     # load the Regional Economic Forecast table to get total GQ for the region in the horizon year
     ref = p.get_table('ref_projection')
     reg_gq_horizon = ref.loc[ref.variable == 'GQ Pop', str(horizon_year)].item()
 
-    # calculate GQ percentage of the region based on decennial data
-    reg_dec_gq_sum = dec['dec_gq'].sum()
-    df['dec_gq_pct'] = df['dec_gq'] / reg_dec_gq_sum
+    # calculate GQ percentage of the region based on decennial or OFM data
+    reg_dec_gq_sum = region_df[gq_col].sum()
+    df[gq_pct_col] = df[gq_col] / reg_dec_gq_sum
 
     # calculate target area GQ for horizon year as a percentage of the regional GQ from REF
     gq_horizon_col = f'gq_{horizon_year}'
-    df[gq_horizon_col] = (df['dec_gq_pct'] * reg_gq_horizon).fillna(0).round(0).astype(int)
+    df[gq_horizon_col] = (df[gq_pct_col] * reg_gq_horizon).fillna(0).round(0).astype(int)
     return df
 
 

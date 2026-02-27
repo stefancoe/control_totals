@@ -83,10 +83,8 @@ def check_base_year_data_exists(pipeline,targets_table):
 
 
 def data_check_targets(df, table_name):
-    # each targets table should have either units_chg or total_pop_chg, but not both
+    # each targets table should have either units_chg or total_pop_chg
     # and each should have emp_chg and target_id
-    if 'units_chg' in df.columns and 'total_pop_chg' in df.columns:
-        raise ValueError(f"{table_name} cannot have both units_chg and total_pop_chg columns.")
     if 'emp_chg' not in df.columns:
         raise ValueError(f"{table_name} must have emp_chg column.")
     if 'target_id' not in df.columns:

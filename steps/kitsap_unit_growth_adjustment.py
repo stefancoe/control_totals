@@ -21,20 +21,20 @@ def load_tables(pipeline, start_year):
 
 def split_housing_growth_targets(df):
     pop_growth = 'total_pop_chg'
-    unit_growth_total = '2020-2044 Housing Growth'
+    unit_growth_total = 'units_chg'
     df['ofm_hhsz'] = df['ofm_hhpop'] / df['ofm_hh']
     df['ofm_vacancy'] = 1 - df['ofm_hh'] / df['ofm_units']
     df['calc_hh_growth'] = df[pop_growth] / df['ofm_hhsz']
     df['calc_unit_growth'] = df['calc_hh_growth'] * (1 - df['ofm_vacancy'])
     df['pct_of_calc_unit_growth'] = df['calc_unit_growth'] / df['calc_unit_growth'].groupby(df['HousingJuris']).transform('sum')
     df[unit_growth_total] = df.groupby('HousingJuris')[unit_growth_total].transform('sum')
-    df['unit_chg'] = df['pct_of_calc_unit_growth'] * df[unit_growth_total]
+    df['units_chg'] = df['pct_of_calc_unit_growth'] * df[unit_growth_total]
     for juris in df['HousingJuris'].unique():
         mask = df['HousingJuris'] == juris
-        df.loc[mask, 'unit_chg'] = saferound(df.loc[mask, 'unit_chg'], 0)
-    df['unit_chg'] = df['unit_chg'].astype(int)
+        df.loc[mask, 'units_chg'] = saferound(df.loc[mask, 'units_chg'], 0)
+    df['units_chg'] = df['units_chg'].astype(int)
     df = df[['target_id','name','total_pop_chg',
-        'unit_chg', 'emp_chg']]
+        'units_chg', 'emp_chg']]
     return df
 
 def run_step(context):

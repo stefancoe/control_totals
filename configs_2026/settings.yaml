@@ -4,7 +4,7 @@
 data_dir: data
 output_dir: output
 
-base_year: 2020 
+base_year: 2024 
 end_year: 2050 # final year for control totals output
 
 targets_end_year: 2044 # year for which growth targets are set
@@ -33,7 +33,7 @@ king_hhsz: # first column is rgid, second is average household size
 king_metro_adj_hhsz: 2.00 # adjusted hhsz used for king county metro rgid areas when calclulating hhpop
                           # for the targets, the rgid totals still use the king_hhsz value above
 
-king_vac: # first column is rgid, second is vacancy rate percentage
+king_vac: # first column is rgid, second is vacancy rate
   1: 4.7
   2: 4.4
   3: 3.6
@@ -143,9 +143,9 @@ Elmer: # database
 #    sql_table: ofm.v_estimates_2019
 #    id_col: block_geoid # id column must be an integer
 
- - name: ofm_parcelized_2018
-   sql_table: ofm.parcelized_saep(2024, 2018) # (vintage year, estimate year)
-   id_col: parcel_id # id column must be an integer
+#  - name: ofm_parcelized_2018
+#    sql_table: ofm.parcelized_saep(2024, 2018) # (vintage year, estimate year)
+#    id_col: parcel_id # id column must be an integer
 
  - name: ofm_parcelized_2019
    sql_table: ofm.parcelized_saep(2024, 2019) # (vintage year, estimate year)
@@ -196,22 +196,28 @@ targets_tables:
  - name: kitsap_targets
    file: Kitsap Growth Targets 2026.csv
    total_pop_chg_col: 2020-2044 Population Growth
+   units_chg_col: 2020-2044 Housing Growth
    emp_chg_col: 2020-2044 Employment Growth
    total_pop_chg_start: 2020
+   units_chg_start: 2020
    emp_chg_start: 2020
 
  - name: pierce_targets
    file: Pierce Growth Targets 2026.csv
    total_pop_chg_col: 2020-2044 Population Growth
+   units_chg_col: 2020-2044 H.U. Growth (HAPT)
    emp_chg_col: 2020-2044 Employment Growth
    total_pop_chg_start: 2020
+   units_chg_start: 2020
    emp_chg_start: 2020
 
  - name: snohomish_targets
    file: Snohomish Growth Targets 2026.csv
    total_pop_chg_col: Population Chg 2020-44
+   units_chg_col: Housing Unit Growth 2020-2044
    emp_chg_col: Employment Chg 2019-44
    total_pop_chg_start: 2020
+   units_chg_start: 2020
    emp_chg_start: 2019
 
 
@@ -237,9 +243,10 @@ steps:
 #  - steps.parcel_control_area_xwalk # creates parcel to control area crosswalk
 #  - steps.prepare_parcel_data # aggregates parcel data to control area
 #  - steps.prepare_block_data # aggregates decennial block data to control area
-#  - steps.adjust_targets_to_base_year # adjusts targets to base year using ofm and employment data
-#  - steps.king_cnty_targets # calculates targets that use housing unit change (only king county for now)
+ - steps.adjust_targets_to_base_year # adjusts targets to base year using ofm and employment data
+#  - steps.king_cnty_targets # calculates targets for King County
 #  - steps.total_pop_chg_targets # calculates targets that use total population change
+ - steps.units_chg_targets # calculates targets that use housing unit change
 #  - steps.emp_chg_targets_res_con # calculates targets for counties that include resource and construction employment
 #  - steps.emp_chg_targets_no_res_con # calculates targets for counties that exclude resource and construction employment
 #  - steps.extrapolate_to_controls_year # extrapolates out to the control totals end year from the targets end year

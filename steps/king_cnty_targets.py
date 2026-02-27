@@ -140,12 +140,12 @@ def calculate_targets(pipeline):
     df = calc_by_target_area(p, df, targets_rgid)
     df = calc_gq_tot_pop(p, df, dec)
     # save table
-    p.save_table('adjusted_units_change_targets',df)
+    p.save_table('adjusted_king_targets',df)
 
 
 def run_step(context):
     # pypyr step
     p = Pipeline(settings_path=context['configs_dir'])
-    print('Calculating targets for counties that use housing targets...')
+    print('Calculating targets for King County...')
     calculate_targets(p)
     return context

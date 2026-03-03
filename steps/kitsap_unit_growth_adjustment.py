@@ -33,6 +33,7 @@ def split_housing_growth_targets(df):
         mask = df['HousingJuris'] == juris
         df.loc[mask, 'units_chg'] = saferound(df.loc[mask, 'units_chg'], 0)
     df['units_chg'] = df['units_chg'].astype(int)
+    df.to_csv('data/kitsap_targets_adj.csv', index=False)
     df = df[['target_id','name','total_pop_chg',
         'units_chg', 'emp_chg']]
     return df

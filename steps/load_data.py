@@ -26,6 +26,7 @@ def data_check_tables(df, table_name):
 def load_targets_to_hdf5(pipeline):
     # load target tables for each county
     p = pipeline
+    targets_end_year = p.settings['targets_end_year']
     for table in p.settings['targets_tables']:
         table_name = table['name']
         file_path = f"{p.get_data_dir()}/{table['file']}"
@@ -36,6 +37,10 @@ def load_targets_to_hdf5(pipeline):
         for col in ['total_pop_chg_col', 'units_chg_col', 'emp_chg_col']:
             if col in table:
                 df.rename(columns={table[f'{col}']: col.replace('_col', '')}, inplace=True, errors='ignore')
+
+        for col in ['total_pop_col', 'units_col', 'emp_col']:
+            if col in table:
+                df.rename(columns={table[f'{col}']: col.replace('col', f'{targets_end_year}')}, inplace=True, errors='ignore')
         
         # check that base year data exists for years specified in targets table settings
         check_base_year_data_exists(pipeline,table)

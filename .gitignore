@@ -8,3 +8,5 @@ wheels/
 
 # Virtual environments
 .venv
+r_scripts/creds.txt
+r_scripts/inputs/base_data_shares_2020.rda

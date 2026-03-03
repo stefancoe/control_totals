@@ -5,7 +5,7 @@ from util import Pipeline, calc_gq
 def load_targets_tables(pipeline):
     p = pipeline
 
-    unit_change_targets = p.get_table('adjusted_units_change_targets')
+    unit_change_targets = p.get_table('adjusted_king_targets')
     pop_change_targets = p.get_table('adjusted_total_pop_change_targets')
     pop_unit_targets = pd.concat([unit_change_targets, pop_change_targets], ignore_index=True).drop(columns=['start'])
 

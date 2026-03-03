@@ -44,8 +44,12 @@ do.plot <- TRUE           # should plots be created
 
 base.year <- 2020
 base.year.in.targets <- base.year # from which base year to start in the targets file (for BY 2018 this should be 2020)
+parcel.base.year <- 2018
 target.year <- 2050       # what is the target year in the targets file    
 aggregate.no.growth.areas <- FALSE
+
+# Should interpolated numbers be rounded
+round.interpolated <- FALSE
 
 #geo.name.split <- "control_hct_id"   # name of the geography column in the parcel file
 geo.name.split <- "subreg_id"
@@ -64,7 +68,7 @@ step <- c(1, 0.5, 0.25) # increments for scaling the iterative increase for RGs 
 
 use.mysql <- TRUE  # if FALSE, base data are taken from base.data.file. 
                    # Set this to TRUE if run for the first time or if there is change in the DB.
-base.db <- paste0(base.year, "_parcel_baseyear") # used if use.mysql is TRUE
+base.db <- paste0(parcel.base.year, "_parcel_baseyear") # used if use.mysql is TRUE
 
 save.base.data <- TRUE # should the base data pulled from mysql be saved. 
                         # Set this to TRUE if use.mysql is TRUE. It allows to 

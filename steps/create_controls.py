@@ -100,8 +100,8 @@ def save_r_scrpt_inputs(pipeline, control_totals_df):
     # calculate additional columns needed for r script
     df['TotEmpTrg_wCRnoMil'] = df['TotEmp50_wCRnoMil'] - df['TotEmp20_wCRnoMil']
     df['TotPopTrg'] = df['TotPop50'] - df['TotPop20']
-    df['GQpct50'] = df['gq_2050'] / df['TotPop50']
-    df['PPH50'] = df['hhpop_2050'] / df['hh_2050']
+    df['GQpct50'] = (df['gq_2050'] / df['TotPop50']).fillna(0).replace([float('inf'), -float('inf')], 0)
+    df['PPH50'] = (df['hhpop_2050'] / df['hh_2050']).fillna(0).replace([float('inf'), -float('inf')], 0)
     # take last 2 digits of county id
     df['county_id'] = df['county_id'].astype(str).str[-2:].astype(int)
     # export final table to excel for r script input

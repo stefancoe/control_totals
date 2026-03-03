@@ -16,6 +16,8 @@ def run_r_script(script_path):
 
 
 def run_step(context):
+    print('Running run_creating_control_totals_from_targets.R...')
     run_r_script('r_scripts/run_creating_control_totals_from_targets.R')
+    print('Running split_ct_to_hct.R...')
     run_r_script('r_scripts/split_ct_to_hct.R')
     return context

@@ -241,7 +241,7 @@ steps:
 #  - steps.create_control_area_geography # creates control area geography by unioning and dissolving regional geographies, military bases, tribal areas, and natural resource areas together
 #  - steps.get_census_data # pulls decennial census data from api and saves to hdf5
  - steps.load_data # loads data from csv files into hdf5
-#  - steps.kitsap_unit_growth_adjustment # fills in missing Kitsap housing unit growth targets
+ - steps.split_unincorporated_kitsap_housing_targets # fills in missing Kitsap housing unit growth targets
 #  - steps.block_control_area_xwalk # creates block to control area crosswalk
 #  - steps.parcel_control_area_xwalk # creates parcel to control area crosswalk
 #  - steps.prepare_parcel_data # aggregates parcel data to control area
